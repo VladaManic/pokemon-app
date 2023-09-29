@@ -1,6 +1,3 @@
-import { useContext } from 'react'
-import LoadingContext from '../../../context/LoadingContext'
-
 import {
     TotalBarWrap,
     ErrorMessage,
@@ -9,12 +6,16 @@ import {
     LoadingTotalSpan,
 } from './style'
 
-const TotalBar = () => {
-    const loadingCtx = useContext(LoadingContext)
+interface Props {
+    isError: boolean
+    isLoading: boolean
+    total: number
+}
 
+const TotalBar = ({ isError, isLoading, total }: Props) => {
     return (
         <TotalBarWrap>
-            {loadingCtx.fetchError ? (
+            {isError ? (
                 <TotalInner>
                     <div></div>
                     <ErrorMessage>error while fetching</ErrorMessage>
@@ -25,7 +26,7 @@ const TotalBar = () => {
                     <LoadingMessage>
                         Total pokemons:{' '}
                         <LoadingTotalSpan>
-                            {!loadingCtx.isFetched ? '...' : '1234'}
+                            {isLoading ? '...' : total}
                         </LoadingTotalSpan>
                     </LoadingMessage>
                 </TotalInner>

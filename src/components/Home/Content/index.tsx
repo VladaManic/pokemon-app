@@ -1,6 +1,3 @@
-import { useContext } from 'react'
-import LoadingContext from '../../../context/LoadingContext'
-
 import FetchAgainBtn from '../FetchAgainBtn'
 
 import {
@@ -12,20 +9,21 @@ import {
 } from './style'
 
 interface Props {
+    isError: boolean
+    isLoading: boolean
+    data: object | undefined
     onClickBtn: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const Content = ({ onClickBtn }: Props) => {
-    const loadingCtx = useContext(LoadingContext)
-
+const Content = ({ isError, isLoading, data, onClickBtn }: Props) => {
     return (
         <ContentWrap>
-            {loadingCtx.fetchError ? (
+            {isError ? (
                 <ErrorWrap>
                     <ErrorMessage>Error, data fetching failed</ErrorMessage>
                     <FetchAgainBtn onClickBtn={onClickBtn} />
                 </ErrorWrap>
-            ) : !loadingCtx.isFetched ? (
+            ) : isLoading ? (
                 <LoadingMessage>Searching for pokemons...</LoadingMessage>
             ) : (
                 <ContentInner>Allright</ContentInner>

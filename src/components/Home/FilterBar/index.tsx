@@ -1,6 +1,3 @@
-import { useContext } from 'react'
-import LoadingContext from '../../../context/LoadingContext'
-
 import FetchAgainBtn from '../FetchAgainBtn'
 
 import {
@@ -12,21 +9,21 @@ import {
 } from './style'
 
 interface Props {
+    isError: boolean
+    isLoading: boolean
     onClickBtn: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const FilterBar = ({ onClickBtn }: Props) => {
-    const loadingCtx = useContext(LoadingContext)
-
+const FilterBar = ({ isError, isLoading, onClickBtn }: Props) => {
     return (
         <FilterBarWrap>
             <FilterBarInner>
-                {loadingCtx.fetchError ? (
+                {isError ? (
                     <ErrorWrap>
                         <ErrorMessage>error while fetching</ErrorMessage>
                         <FetchAgainBtn onClickBtn={onClickBtn} />
                     </ErrorWrap>
-                ) : !loadingCtx.isFetched ? (
+                ) : isLoading ? (
                     <LoadingMessage>Filter list is loading</LoadingMessage>
                 ) : (
                     <p>Allright</p>

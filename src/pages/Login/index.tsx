@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { z, ZodType } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import isStorageSupported from '../../utils/isStorageSupported'
+import isStorageSupported from '../../helpers/isStorageSupported'
 import clsx from 'clsx'
 
 import { FormData } from '../../types/interfaces'
