@@ -6,7 +6,7 @@ import nextIcon from '../../../assets/img/next-icon.svg'
 interface Props {
     page: number
     total: number
-    onPageChange(param: number): React.MouseEventHandler<HTMLButtonElement>
+    onPageChange(param: number): void
 }
 import {
     PaginationWrap,
