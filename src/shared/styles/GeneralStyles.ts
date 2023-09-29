@@ -40,7 +40,9 @@ export default createGlobalStyle`
         height: auto;
     }
 
-    .default-link {
-        text-decoration: none;
+    #app-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
     }
 `

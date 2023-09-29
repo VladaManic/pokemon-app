@@ -10,12 +10,12 @@ import GlobalFonts from './assets/font/fonts'
 
 function App() {
     return (
-        <>
+        <div id="app-wrapper">
             <GeneralStyles />
             <GlobalFonts />
             <Header />
             <Main />
-        </>
+        </div>
     )
 }
 

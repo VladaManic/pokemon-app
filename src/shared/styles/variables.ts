@@ -6,4 +6,6 @@ export const color = {
     labelGray: '#818181',
     submitGray: '#292B29',
     errorRed: '#FF0000',
+    loadingGray: '#969696',
+    barBorderGray: '#EFEFEF',
 }
