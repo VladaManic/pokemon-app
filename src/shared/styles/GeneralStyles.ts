@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import { color } from "./variables";
+import { createGlobalStyle } from 'styled-components'
+import { color } from './variables'
 
 export default createGlobalStyle`
     html,
@@ -43,4 +43,4 @@ export default createGlobalStyle`
     .default-link {
         text-decoration: none;
     }
-`;
+`
