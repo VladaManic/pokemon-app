@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 import { getPokemonList } from '../../helpers/tanStackQuery'
 
 import FilterBar from '../../components/Home/FilterBar'
@@ -13,27 +12,14 @@ import { HomeWrap } from './style'
 const Home = () => {
     const [currentPage, setCurrentPage] = useState<number>(1)
 
+    //Calling helper function which is enabling tanstack-query pagination functionality
     const { isError, isLoading, data } = useQuery({
         queryKey: ['pokemons', currentPage],
         queryFn: () => getPokemonList(currentPage),
     })
 
-    const fetchData = () => {
-        axios
-            .get('https://pokeapi.co/api/v2/pokemon/')
-            .then((res) => {
-                console.log(res.data)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
-    }
-    useEffect(() => {
-        fetchData()
-    }, [])
-
-    const onClickHandler = () => {
-        fetchData()
+    const onClickHandler = async () => {
+        console.log('try again')
     }
 
     const onPageChangeHandler = (param: number) => {
