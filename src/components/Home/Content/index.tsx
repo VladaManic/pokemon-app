@@ -1,5 +1,8 @@
 import FetchAgainBtn from '../FetchAgainBtn'
+import PokemonsList from '../PokemonsList'
+import PokemonDetails from '../PokemonDetails'
 
+import { PokemonObj } from '../../../types/interfaces'
 import {
     ContentWrap,
     ErrorWrap,
@@ -11,7 +14,7 @@ import {
 interface Props {
     isError: boolean
     isLoading: boolean
-    data: object | undefined
+    data: PokemonObj[]
     onClickBtn: React.MouseEventHandler<HTMLButtonElement>
 }
 
@@ -26,7 +29,10 @@ const Content = ({ isError, isLoading, data, onClickBtn }: Props) => {
             ) : isLoading ? (
                 <LoadingMessage>Searching for pokemons...</LoadingMessage>
             ) : (
-                <ContentInner>Allright</ContentInner>
+                <ContentInner>
+                    <PokemonsList pokemons={data} />
+                    <PokemonDetails />
+                </ContentInner>
             )}
         </ContentWrap>
     )

@@ -31,4 +31,6 @@ export const LoadingMessage = styled.h2`
 
 export const ContentInner = styled.div`
     display: flex;
+    width: 100%;
+    padding: 25px;
 `

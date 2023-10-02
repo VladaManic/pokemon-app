@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonList } from '../../helpers/tanStackQuery'
 
@@ -22,6 +23,20 @@ const Home = () => {
         console.log('try again')
     }
 
+    const fetchData = () => {
+        axios
+            .get('https://pokeapi.co/api/v2/pokemon/')
+            .then((res) => {
+                console.log(res.data)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+    }
+    useEffect(() => {
+        fetchData()
+    }, [])
+
     const onPageChangeHandler = (param: number) => {
         setCurrentPage(param)
     }
@@ -37,7 +52,7 @@ const Home = () => {
                 onClickBtn={onClickHandler}
                 isError={isError}
                 isLoading={isLoading}
-                data={data?.pokemons}
+                data={data?.pokemons.results}
             />
             <TotalBar
                 isError={isError}
