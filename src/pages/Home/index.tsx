@@ -45,6 +45,8 @@ const Home = () => {
                 total={data?.totalPokemons}
             />
             <Pagination
+                isError={isError}
+                isLoading={isLoading}
                 page={currentPage}
                 total={data?.totalPokemons}
                 onPageChange={onPageChangeHandler}

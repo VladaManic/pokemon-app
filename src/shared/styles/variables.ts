@@ -8,4 +8,6 @@ export const color = {
     errorRed: '#FF0000',
     loadingGray: '#969696',
     barBorderGray: '#EFEFEF',
+    paginationGray: '#DFE3E8',
+    disableGray: '#919EAB',
 }
