@@ -26,8 +26,9 @@ export const FormWrap = styled.div`
             padding-left: 10px;
             margin-bottom: 20px;
             background-color: ${color.defaultWhite};
-            border: 2px solid ${color.borderGray};
+            border: 1px solid ${color.borderGray};
             border-radius: 8px;
+            box-shadow: 1px 1px 5px 0 ${color.borderGray};
 
             &.error {
                 color: ${color.errorRed};
