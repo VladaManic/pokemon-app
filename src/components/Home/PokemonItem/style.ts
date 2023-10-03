@@ -14,10 +14,17 @@ export const PokemonWrap = styled.div`
     border: 1px solid ${color.borderGray};
     border-radius: 8px;
     box-shadow: 1px 1px 5px 0 ${color.borderGray};
+    transition: all 0.4s ease;
 
     &:nth-of-type(4),
     &:nth-of-type(8) {
         margin-bottom: 0;
+    }
+
+    &:hover {
+        background-color: ${color.hoverPurple};
+        border: 1px solid ${color.borderPurple};
+        cursor: pointer;
     }
 `
 
@@ -26,7 +33,10 @@ export const PokemonInner = styled.div`
     align-items: center;
 `
 
-export const PokemonImg = styled.img``
+export const PokemonImg = styled.img`
+    max-height: 80px;
+    margin-right: 20px;
+`
 
 export const PokemonName = styled.p`
     font-size: 16px;

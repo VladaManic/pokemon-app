@@ -11,4 +11,6 @@ export const color = {
     paginationGray: '#DFE3E8',
     disableGray: '#919EAB',
     detailsGray: '#B4B4B4',
+    hoverPurple: '#E6E3FA',
+    borderPurple: '#7C68EE',
 }

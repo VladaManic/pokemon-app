@@ -21,9 +21,9 @@ const PokemonItem = ({ singlePokemon }: Props) => {
             <PokemonInner>
                 <PokemonImg
                     src={
-                        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/` +
+                        `https://unpkg.com/pokeapi-sprites@2.0.4/sprites/pokemon/other/dream-world/` +
                         pokemonNo +
-                        `.png`
+                        `.svg`
                     }
                     alt={singlePokemon.name}
                 />
