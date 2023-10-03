@@ -1,16 +1,18 @@
-import { useState } from 'react'
+import SinglePokemon from '../../Reusable/SinglePokemon'
 
 import { PokemonDetailsWrap, NoPokemonWrap } from './style'
 
-const PokemonDetails = () => {
-    const [chosenPokemon, setChosenPokemon] = useState<number>(0)
+interface Props {
+    pokemonId: number
+}
 
+const PokemonDetails = ({ pokemonId }: Props) => {
     return (
         <PokemonDetailsWrap>
-            {chosenPokemon === 0 ? (
+            {pokemonId === 0 ? (
                 <NoPokemonWrap>Select pokemon to see its details</NoPokemonWrap>
             ) : (
-                <p>Allright</p>
+                <SinglePokemon pokemonId={pokemonId} />
             )}
         </PokemonDetailsWrap>
     )

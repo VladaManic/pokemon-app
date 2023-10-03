@@ -17,15 +17,16 @@ import {
 
 interface Props {
     singlePokemon: PokemonObj
+    onClick: React.MouseEventHandler<HTMLDivElement>
 }
 
-const PokemonItem = ({ singlePokemon }: Props) => {
+const PokemonItem = ({ singlePokemon, onClick }: Props) => {
     const [imgLoader, setImgLoader] = useState<boolean>(true)
     const url = singlePokemon.url
     const pokemonNo = url.split('/')[6]
 
     return (
-        <PokemonWrap>
+        <PokemonWrap id={pokemonNo} onClick={onClick}>
             <PokemonInner>
                 <ImgWrap>
                     <LoaderWrap className={clsx(!imgLoader && 'hide')}>

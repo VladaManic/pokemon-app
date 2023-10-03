@@ -5,13 +5,18 @@ import { PokemonListWrap } from './style'
 
 interface Props {
     pokemons: PokemonObj[]
+    onClick: React.MouseEventHandler<HTMLDivElement>
 }
 
-const PokemonsList = ({ pokemons }: Props) => {
+const PokemonsList = ({ pokemons, onClick }: Props) => {
     return (
         <PokemonListWrap>
             {pokemons.map((singlePokemon: PokemonObj, index: number) => (
-                <PokemonItem key={index} singlePokemon={singlePokemon} />
+                <PokemonItem
+                    key={index}
+                    singlePokemon={singlePokemon}
+                    onClick={onClick}
+                />
             ))}
         </PokemonListWrap>
     )

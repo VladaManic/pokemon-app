@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import FetchAgainBtn from '../FetchAgainBtn'
 import PokemonsList from '../PokemonsList'
 import PokemonDetails from '../PokemonDetails'
@@ -19,6 +21,15 @@ interface Props {
 }
 
 const Content = ({ isError, isLoading, data, onClickBtn }: Props) => {
+    const [chosenPokemon, setChosenPokemon] = useState<number>(0)
+
+    const onClickHandler = (
+        e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
+    ) => {
+        const id = parseInt(e.currentTarget.id)
+        setChosenPokemon(id)
+    }
+
     return (
         <ContentWrap>
             {isError ? (
@@ -30,8 +41,8 @@ const Content = ({ isError, isLoading, data, onClickBtn }: Props) => {
                 <LoadingMessage>Searching for pokemons...</LoadingMessage>
             ) : (
                 <ContentInner>
-                    <PokemonsList pokemons={data} />
-                    <PokemonDetails />
+                    <PokemonsList pokemons={data} onClick={onClickHandler} />
+                    <PokemonDetails pokemonId={chosenPokemon} />
                 </ContentInner>
             )}
         </ContentWrap>
