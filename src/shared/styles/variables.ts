@@ -10,4 +10,5 @@ export const color = {
     barBorderGray: '#EFEFEF',
     paginationGray: '#DFE3E8',
     disableGray: '#919EAB',
+    detailsGray: '#B4B4B4',
 }

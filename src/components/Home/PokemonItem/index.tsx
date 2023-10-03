@@ -1,6 +1,8 @@
 import { PokemonObj } from '../../../types/interfaces'
 import {
     PokemonWrap,
+    PokemonInner,
+    PokemonImg,
     PokemonName,
     PokemonIndexWrap,
     PokemonIndexInner,
@@ -16,7 +18,17 @@ const PokemonItem = ({ singlePokemon }: Props) => {
 
     return (
         <PokemonWrap>
-            <PokemonName>{singlePokemon.name}</PokemonName>
+            <PokemonInner>
+                <PokemonImg
+                    src={
+                        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/` +
+                        pokemonNo +
+                        `.png`
+                    }
+                    alt={singlePokemon.name}
+                />
+                <PokemonName>{singlePokemon.name}</PokemonName>
+            </PokemonInner>
             <PokemonIndexWrap>
                 <PokemonIndexInner>{pokemonNo}</PokemonIndexInner>
             </PokemonIndexWrap>

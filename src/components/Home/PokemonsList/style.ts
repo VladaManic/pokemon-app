@@ -3,8 +3,10 @@ import styled from 'styled-components'
 
 export const PokemonListWrap = styled.div`
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     flex-wrap: wrap;
+    align-content: flex-start;
     width: 60%;
+    height: 550px;
     padding-right: 25px;
 `
