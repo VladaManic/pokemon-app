@@ -44,8 +44,10 @@ const PokemonItem = ({ singlePokemon }: Props) => {
                 </ImgWrap>
                 <PokemonName>{singlePokemon.name}</PokemonName>
             </PokemonInner>
-            <PokemonIndexWrap>
-                <PokemonIndexInner>{pokemonNo}</PokemonIndexInner>
+            <PokemonIndexWrap className="index-wrap">
+                <PokemonIndexInner className="index-inner">
+                    {pokemonNo}
+                </PokemonIndexInner>
             </PokemonIndexWrap>
         </PokemonWrap>
     )

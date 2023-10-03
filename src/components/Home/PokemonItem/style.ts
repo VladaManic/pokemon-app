@@ -25,6 +25,10 @@ export const PokemonWrap = styled.div`
         background-color: ${color.hoverPurple};
         border: 1px solid ${color.borderPurple};
         cursor: pointer;
+
+        .index-wrap {
+            background-color: ${color.defaultBg};
+        }
     }
 `
 
@@ -65,6 +69,7 @@ export const PokemonIndexWrap = styled.div`
     height: 20px;
     border-radius: 50px;
     box-shadow: 0 2px 2px 0 ${color.borderGray};
+    transition: all 0.4s ease;
 `
 
 export const PokemonIndexInner = styled.p`
