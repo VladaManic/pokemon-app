@@ -33,9 +33,17 @@ export const PokemonInner = styled.div`
     align-items: center;
 `
 
-export const PokemonImg = styled.img`
-    max-height: 80px;
+export const ImgWrap = styled.div`
+    display: flex;
+    align-items: center;
+    height: 80px;
     margin-right: 20px;
+`
+
+export const LoaderWrap = styled.div``
+
+export const PokemonImg = styled.img`
+    height: 100%;
 `
 
 export const PokemonName = styled.p`

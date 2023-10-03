@@ -13,4 +13,6 @@ export const color = {
     detailsGray: '#B4B4B4',
     hoverPurple: '#E6E3FA',
     borderPurple: '#7C68EE',
+    loaderTransparent: '#F3F3F3',
+    loaderBlue: '#87ace8',
 }
