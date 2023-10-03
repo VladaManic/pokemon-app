@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import clsx from 'clsx'
 
 import Loader from '../../../layout/Loader'
 
@@ -27,9 +28,7 @@ const PokemonItem = ({ singlePokemon }: Props) => {
         <PokemonWrap>
             <PokemonInner>
                 <ImgWrap>
-                    <LoaderWrap
-                        style={{ display: imgLoader ? 'block' : 'none' }}
-                    >
+                    <LoaderWrap className={clsx(!imgLoader && 'hide')}>
                         <Loader />
                     </LoaderWrap>
                     <PokemonImg
@@ -40,7 +39,7 @@ const PokemonItem = ({ singlePokemon }: Props) => {
                         }
                         alt={singlePokemon.name}
                         onLoad={() => setImgLoader(false)}
-                        style={{ display: imgLoader ? 'none' : 'block' }}
+                        className={clsx(imgLoader && 'hide')}
                     />
                 </ImgWrap>
                 <PokemonName>{singlePokemon.name}</PokemonName>

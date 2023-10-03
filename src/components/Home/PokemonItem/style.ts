@@ -40,10 +40,18 @@ export const ImgWrap = styled.div`
     margin-right: 20px;
 `
 
-export const LoaderWrap = styled.div``
+export const LoaderWrap = styled.div`
+    &.hide {
+        display: none;
+    }
+`
 
 export const PokemonImg = styled.img`
     height: 100%;
+
+    &.hide {
+        display: none;
+    }
 `
 
 export const PokemonName = styled.p`
