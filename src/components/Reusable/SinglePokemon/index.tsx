@@ -4,12 +4,15 @@ import clsx from 'clsx'
 
 import Loader from '../../../layout/Loader'
 
+import catchIcon from '../../../assets/img/catch.svg'
 import LinkIcon from '../../../assets/img/open-link.svg'
 import { AbilityObj } from '../../../types/interfaces'
 import {
-    SinglePokemonWrap,
     ErrorWrap,
     LoadingText,
+    SinglePokemonWrap,
+    CatchButton,
+    CatchImg,
     LoaderWrap,
     PokemonImg,
     TitleWrap,
@@ -41,6 +44,9 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                 <LoadingText>Selected pokemon’s data is loading...</LoadingText>
             ) : (
                 <SinglePokemonWrap>
+                    <CatchButton name={pokemonId.toString()}>
+                        <CatchImg src={catchIcon} alt="Catch icon" />
+                    </CatchButton>
                     <LoaderWrap className={clsx(!imgLoader && 'hide')}>
                         <Loader />
                     </LoaderWrap>

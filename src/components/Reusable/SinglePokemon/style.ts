@@ -1,14 +1,6 @@
 import styled from 'styled-components'
 import { color } from '../../../shared/styles/variables'
 
-export const SinglePokemonWrap = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding-right: 30px;
-    padding-left: 30px;
-`
-
 export const ErrorWrap = styled.h2`
     margin: auto;
     font-size: 24px;
@@ -25,6 +17,25 @@ export const LoadingText = styled.div`
     font-weight: 400;
     color: ${color.detailsGray};
     text-align: center;
+`
+
+export const SinglePokemonWrap = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 30px;
+    padding-left: 30px;
+`
+
+export const CatchButton = styled.button`
+    position: absolute;
+    top: 10px;
+    left: 10px;
+`
+
+export const CatchImg = styled.img`
+    width: 47px;
 `
 
 export const LoaderWrap = styled.div`
