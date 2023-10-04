@@ -14,3 +14,8 @@ export type AbilityObj = {
     is_hidden: boolean
     slot: number
 }
+
+export type ColorObj = {
+    name: string
+    url: string
+}

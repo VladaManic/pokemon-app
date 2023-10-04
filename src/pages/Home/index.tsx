@@ -25,7 +25,7 @@ const Home = () => {
 
     const fetchData = () => {
         axios
-            .get('https://pokeapi.co/api/v2/pokemon/2')
+            .get('https://pokeapi.co/api/v2/pokemon-color/')
             .then((res) => {
                 console.log(res.data)
             })
@@ -43,11 +43,7 @@ const Home = () => {
 
     return (
         <HomeWrap>
-            <FilterBar
-                onClickBtn={onClickHandler}
-                isError={isError}
-                isLoading={isLoading}
-            />
+            <FilterBar onClickBtn={onClickHandler} />
             <Content
                 onClickBtn={onClickHandler}
                 isError={isError}
