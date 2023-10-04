@@ -32,11 +32,6 @@ const Content = ({ isError, isLoading, data, onClickBtn }: Props) => {
         setImgLoader(true)
     }
 
-    const setImgLoaderHandler = () => {
-        console.log('load')
-        setImgLoader(false)
-    }
-
     return (
         <ContentWrap>
             {isError ? (
@@ -52,7 +47,7 @@ const Content = ({ isError, isLoading, data, onClickBtn }: Props) => {
                     <PokemonDetails
                         pokemonId={chosenPokemon}
                         imgLoader={imgLoader}
-                        onLoadImg={setImgLoaderHandler}
+                        onLoadImg={() => setImgLoader(false)}
                     />
                 </ContentInner>
             )}

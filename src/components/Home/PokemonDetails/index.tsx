@@ -5,8 +5,7 @@ import { PokemonDetailsWrap, NoPokemonWrap } from './style'
 interface Props {
     pokemonId: number
     imgLoader: boolean
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onLoadImg: any
+    onLoadImg: () => void
 }
 
 const PokemonDetails = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
