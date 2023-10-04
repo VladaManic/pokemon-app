@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonSingle } from '../../../helpers/tanStackQuerySingle'
+import clsx from 'clsx'
 
 import Loader from '../../../layout/Loader'
 
@@ -8,6 +9,7 @@ import { AbilityObj } from '../../../types/interfaces'
 import {
     SinglePokemonWrap,
     ErrorWrap,
+    LoadingText,
     LoaderWrap,
     PokemonImg,
     TitleWrap,
@@ -20,9 +22,12 @@ import {
 
 interface Props {
     pokemonId: number
+    imgLoader: boolean
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onLoadImg: any
 }
 
-const SinglePokemon = ({ pokemonId }: Props) => {
+const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
     //Calling helper function which is enabling tanstack-query pagination functionality
     const { isError, isLoading, data } = useQuery({
         queryKey: ['pokemon', pokemonId],
@@ -34,17 +39,20 @@ const SinglePokemon = ({ pokemonId }: Props) => {
             {isError ? (
                 <ErrorWrap>Error, data fetching failed</ErrorWrap>
             ) : isLoading ? (
-                <LoaderWrap>
-                    <Loader />
-                </LoaderWrap>
+                <LoadingText>Selected pokemon’s data is loading...</LoadingText>
             ) : (
                 <SinglePokemonWrap>
+                    <LoaderWrap className={clsx(!imgLoader && 'hide')}>
+                        <Loader />
+                    </LoaderWrap>
                     <PokemonImg
                         src={
                             data?.pokemon.sprites.other.dream_world
                                 .front_default
                         }
                         alt={data?.pokemon.name}
+                        onLoad={onLoadImg}
+                        className={clsx(imgLoader && 'hide')}
                     />
                     <TitleWrap>
                         <PokemonName>{data?.pokemon.name}</PokemonName>

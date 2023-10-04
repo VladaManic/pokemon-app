@@ -17,8 +17,27 @@ export const ErrorWrap = styled.h2`
     color: ${color.errorRed};
 `
 
-export const LoaderWrap = styled.div`
+export const LoadingText = styled.div`
+    width: 180px;
     margin: auto;
+    font-size: 19px;
+    line-height: 22px;
+    font-weight: 400;
+    color: ${color.detailsGray};
+    text-align: center;
+`
+
+export const LoaderWrap = styled.div`
+    margin-top: 30px;
+
+    &.hide {
+        display: none;
+    }
+
+    .loader-inner {
+        width: 60px !important;
+        height: 60px !important;
+    }
 `
 
 export const PokemonImg = styled.img`

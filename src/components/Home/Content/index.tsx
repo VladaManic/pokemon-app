@@ -22,12 +22,19 @@ interface Props {
 
 const Content = ({ isError, isLoading, data, onClickBtn }: Props) => {
     const [chosenPokemon, setChosenPokemon] = useState<number>(0)
+    const [imgLoader, setImgLoader] = useState<boolean>(true)
 
     const onClickHandler = (
         e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
     ) => {
         const id = parseInt(e.currentTarget.id)
         setChosenPokemon(id)
+        setImgLoader(true)
+    }
+
+    const setImgLoaderHandler = () => {
+        console.log('load')
+        setImgLoader(false)
     }
 
     return (
@@ -42,7 +49,11 @@ const Content = ({ isError, isLoading, data, onClickBtn }: Props) => {
             ) : (
                 <ContentInner>
                     <PokemonsList pokemons={data} onClick={onClickHandler} />
-                    <PokemonDetails pokemonId={chosenPokemon} />
+                    <PokemonDetails
+                        pokemonId={chosenPokemon}
+                        imgLoader={imgLoader}
+                        onLoadImg={setImgLoaderHandler}
+                    />
                 </ContentInner>
             )}
         </ContentWrap>
