@@ -17,10 +17,17 @@ interface Props {
     isError: boolean
     isLoading: boolean
     data: PokemonObj[]
+    selectedColor: number
     onClickBtn: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const Content = ({ isError, isLoading, data, onClickBtn }: Props) => {
+const Content = ({
+    isError,
+    isLoading,
+    data,
+    selectedColor,
+    onClickBtn,
+}: Props) => {
     const [chosenPokemon, setChosenPokemon] = useState<number>(0)
     const [imgLoader, setImgLoader] = useState<boolean>(true)
 
@@ -43,7 +50,11 @@ const Content = ({ isError, isLoading, data, onClickBtn }: Props) => {
                 <LoadingMessage>Searching for pokemons...</LoadingMessage>
             ) : (
                 <ContentInner>
-                    <PokemonsList pokemons={data} onClick={onClickHandler} />
+                    <PokemonsList
+                        pokemons={data}
+                        selectedColor={selectedColor}
+                        onClick={onClickHandler}
+                    />
                     <PokemonDetails
                         pokemonId={chosenPokemon}
                         imgLoader={imgLoader}

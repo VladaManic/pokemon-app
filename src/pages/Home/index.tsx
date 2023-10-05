@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import ColoredPokemonsContext from '../../context/ColoredPokemonsContext'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonList } from '../../helpers/tanStackQuery'
@@ -11,12 +12,15 @@ import Pagination from '../../components/Home/Pagination'
 import { HomeWrap } from './style'
 
 const Home = () => {
+    const coloredPokemonsCtx = useContext(ColoredPokemonsContext)
     const [currentPage, setCurrentPage] = useState<number>(1)
+    const [selectedColor, setSelectedColor] = useState<number>(0)
 
     //Calling helper function which is enabling tanstack-query pagination functionality
     const { isError, isLoading, data } = useQuery({
-        queryKey: ['pokemons', currentPage],
-        queryFn: () => getPokemonList(currentPage),
+        queryKey: ['pokemons', currentPage, selectedColor],
+        queryFn: () =>
+            getPokemonList(coloredPokemonsCtx, currentPage, selectedColor),
     })
 
     const onClickHandler = async () => {
@@ -25,7 +29,7 @@ const Home = () => {
 
     const fetchData = () => {
         axios
-            .get('https://pokeapi.co/api/v2/pokemon-color/')
+            .get('https://pokeapi.co/api/v2/pokemon-color/1')
             .then((res) => {
                 console.log(res.data)
             })
@@ -41,14 +45,25 @@ const Home = () => {
         setCurrentPage(param)
     }
 
+    const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const id = e.currentTarget.value
+        setSelectedColor(parseInt(id))
+        setCurrentPage(1)
+        coloredPokemonsCtx.setPage(1)
+    }
+
     return (
         <HomeWrap>
-            <FilterBar onClickBtn={onClickHandler} />
-            <Content
+            <FilterBar
                 onClickBtn={onClickHandler}
+                onChangeColor={onChangeHandler}
+            />
+            <Content
                 isError={isError}
                 isLoading={isLoading}
-                data={data?.pokemons.results}
+                data={data?.pokemons}
+                selectedColor={selectedColor}
+                onClickBtn={onClickHandler}
             />
             <TotalBar
                 isError={isError}
@@ -60,6 +75,7 @@ const Home = () => {
                 isLoading={isLoading}
                 page={currentPage}
                 total={data?.totalPokemons}
+                selectedColor={selectedColor}
                 onPageChange={onPageChangeHandler}
             />
         </HomeWrap>

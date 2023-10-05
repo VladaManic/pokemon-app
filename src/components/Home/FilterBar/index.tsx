@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonColors } from '../../../helpers/tanStackQueryColors'
 
@@ -20,18 +19,15 @@ import {
 
 interface Props {
     onClickBtn: React.MouseEventHandler<HTMLButtonElement>
+    onChangeColor: React.ChangeEventHandler<HTMLSelectElement>
 }
 
-const FilterBar = ({ onClickBtn }: Props) => {
+const FilterBar = ({ onClickBtn, onChangeColor }: Props) => {
     //Calling helper function which is enabling tanstack-query fetch available colors functionality
     const { isError, isLoading, data } = useQuery({
         queryKey: ['colors'],
         queryFn: () => getPokemonColors(),
     })
-
-    const onChangeHandler = (e: any) => {
-        console.log(e.currentTarget.value)
-    }
 
     return (
         <FilterBarWrap>
@@ -49,9 +45,9 @@ const FilterBar = ({ onClickBtn }: Props) => {
                         <SelectWrap>
                             <SelectInner
                                 defaultValue=""
-                                onChange={onChangeHandler}
+                                onChange={onChangeColor}
                             >
-                                <OptionWrap disabled></OptionWrap>
+                                <OptionWrap value="0"></OptionWrap>
                                 {data.colors.results.map(
                                     (color: ColorObj, index: number) => (
                                         <OptionWrap
