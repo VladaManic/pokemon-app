@@ -6,11 +6,11 @@ export const PokemonWrap = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 48%;
-    padding: 10px;
+    width: 45%;
+    height: 22%;
     padding-right: 15px;
-    margin-right: 25px;
-    margin-bottom: 25px;
+    padding-left: 15px;
+    margin-bottom: 2%;
     border: 1px solid ${color.borderGray};
     border-radius: 8px;
     box-shadow: 1px 1px 5px 0 ${color.borderGray};
@@ -40,7 +40,7 @@ export const PokemonInner = styled.div`
 export const ImgWrap = styled.div`
     display: flex;
     align-items: center;
-    height: 80px;
+    height: 65px;
     margin-right: 20px;
 `
 
