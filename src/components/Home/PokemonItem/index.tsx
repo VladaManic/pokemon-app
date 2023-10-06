@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import clsx from 'clsx'
 
-import Loader from '../../../layout/Loader'
+import Loader from '../../../components/Reusable/Loader'
 
 import { PokemonObj } from '../../../types/interfaces'
 import {

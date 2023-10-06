@@ -3,7 +3,7 @@ import { getPokemonSingle } from '../../../helpers/tanStackQuerySingle'
 import clsx from 'clsx'
 import { format } from 'date-fns'
 
-import Loader from '../../../layout/Loader'
+import Loader from '../../../components/Reusable/Loader'
 
 import catchIcon from '../../../assets/img/catch.svg'
 import LinkIcon from '../../../assets/img/open-link.svg'
