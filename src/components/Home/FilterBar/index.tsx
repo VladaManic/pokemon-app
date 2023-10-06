@@ -4,7 +4,6 @@ import { getPokemonColors } from '../../../helpers/tanStackQueryColors'
 
 import FetchAgainBtn from '../../Reusable/FetchAgainBtn'
 
-import { ColorObj } from '../../../types/interfaces'
 import {
     FilterBarWrap,
     FilterBarInner,
@@ -17,6 +16,7 @@ import {
     SelectInner,
     OptionWrap,
 } from './style'
+import { ColorObj } from '../../../types/interfaces'
 
 interface Props {
     onChangeColor: React.ChangeEventHandler<HTMLSelectElement>

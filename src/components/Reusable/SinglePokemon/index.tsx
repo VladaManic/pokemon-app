@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonSingle } from '../../../helpers/tanStackQuerySingle'
 import clsx from 'clsx'
@@ -7,7 +8,6 @@ import Loader from '../../../components/Reusable/Loader'
 
 import catchIcon from '../../../assets/img/catch.svg'
 import LinkIcon from '../../../assets/img/open-link.svg'
-import { AbilityObj } from '../../../types/interfaces'
 import {
     ErrorWrap,
     LoadingText,
@@ -26,6 +26,7 @@ import {
     TextInner,
     TimeInner,
 } from './style'
+import { AbilityObj } from '../../../types/interfaces'
 
 interface Props {
     pokemonId: number
@@ -65,7 +66,12 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                     />
                     <TitleWrap>
                         <PokemonName>{data?.pokemon.name}</PokemonName>
-                        <LinkImg src={LinkIcon} alt={data?.pokemon.name} />
+                        <NavLink
+                            to={`/pokemon/${data?.pokemon.name}`}
+                            className="nav-link"
+                        >
+                            <LinkImg src={LinkIcon} alt={data?.pokemon.name} />
+                        </NavLink>
                     </TitleWrap>
                     <PokemonHeight>
                         height: {data?.pokemon.height}

@@ -3,8 +3,8 @@ import ColoredPokemonsContext from '../../../context/ColoredPokemonsContext'
 
 import PokemonItem from '../PokemonItem'
 
-import { PokemonObj } from '../../../types/interfaces'
 import { PokemonListWrap } from './style'
+import { PokemonObj } from '../../../types/interfaces'
 
 interface Props {
     pokemons: PokemonObj[]

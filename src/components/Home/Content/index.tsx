@@ -4,7 +4,6 @@ import FetchAgainBtn from '../../Reusable/FetchAgainBtn'
 import PokemonsList from '../PokemonsList'
 import PokemonDetails from '../PokemonDetails'
 
-import { PokemonObj } from '../../../types/interfaces'
 import {
     ContentWrap,
     ErrorWrap,
@@ -12,6 +11,7 @@ import {
     LoadingMessage,
     ContentInner,
 } from './style'
+import { PokemonObj } from '../../../types/interfaces'
 
 interface Props {
     isError: boolean

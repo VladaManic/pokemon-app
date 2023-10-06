@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import ColoredPokemonsContext from '../../context/ColoredPokemonsContext'
-import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonList } from '../../helpers/tanStackQuery'
+import axios from 'axios'
 
 import FilterBar from '../../components/Home/FilterBar'
 import Content from '../../components/Home/Content'

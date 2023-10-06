@@ -3,7 +3,6 @@ import clsx from 'clsx'
 
 import Loader from '../../../components/Reusable/Loader'
 
-import { PokemonObj } from '../../../types/interfaces'
 import {
     PokemonWrap,
     PokemonInner,
@@ -14,6 +13,7 @@ import {
     PokemonIndexWrap,
     PokemonIndexInner,
 } from './style'
+import { PokemonObj } from '../../../types/interfaces'
 
 interface Props {
     singlePokemon: PokemonObj

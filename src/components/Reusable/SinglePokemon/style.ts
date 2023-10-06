@@ -61,6 +61,11 @@ export const TitleWrap = styled.div`
     margin-right: auto;
     margin-bottom: 50px;
     margin-left: auto;
+    transition: all 0.4s ease;
+
+    .nav-link:hover {
+        opacity: 0.6;
+    }
 `
 
 export const PokemonName = styled.h2`
@@ -69,6 +74,7 @@ export const PokemonName = styled.h2`
 `
 
 export const LinkImg = styled.img`
+    margin-bottom: -3px;
     margin-left: 5px;
 `
 

@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import isStorageSupported from '../../helpers/isStorageSupported'
 import clsx from 'clsx'
 
-import { FormData } from '../../types/interfaces'
 import {
     LocalStorageErrorWrap,
     FormWrap,
@@ -14,6 +13,7 @@ import {
     ErrorWrap,
     NotificationWrap,
 } from './style'
+import { FormData } from '../../types/interfaces'
 
 const Login = () => {
     const navigate = useNavigate()
