@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import FetchAgainBtn from '../FetchAgainBtn'
+import FetchAgainBtn from '../../Reusable/FetchAgainBtn'
 import PokemonsList from '../PokemonsList'
 import PokemonDetails from '../PokemonDetails'
 

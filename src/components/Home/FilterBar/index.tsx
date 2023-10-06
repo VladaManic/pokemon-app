@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonColors } from '../../../helpers/tanStackQueryColors'
 
-import FetchAgainBtn from '../FetchAgainBtn'
+import FetchAgainBtn from '../../Reusable/FetchAgainBtn'
 
 import { ColorObj } from '../../../types/interfaces'
 import {
@@ -19,7 +19,6 @@ import {
 } from './style'
 
 interface Props {
-    //onClickBtn: React.MouseEventHandler<HTMLButtonElement>
     onChangeColor: React.ChangeEventHandler<HTMLSelectElement>
 }
 

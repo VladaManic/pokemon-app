@@ -64,10 +64,7 @@ const Home = () => {
 
     return (
         <HomeWrap>
-            <FilterBar
-                //onClickBtn={onClickHandler}
-                onChangeColor={onChangeHandler}
-            />
+            <FilterBar onChangeColor={onChangeHandler} />
             <Content
                 isError={isError}
                 isLoading={isLoading}
