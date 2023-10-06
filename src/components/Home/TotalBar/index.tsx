@@ -35,7 +35,7 @@ const TotalBar = ({ isError, isLoading, total, dataUpdatedAt }: Props) => {
                                 <TimeInner>
                                     {format(
                                         dataUpdatedAt,
-                                        'dd MMMM yy, hh:mm:ss'
+                                        'dd MMMM yy, k:mm:ss'
                                     )}
                                 </TimeInner>
                             </>

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonSingle } from '../../../helpers/tanStackQuerySingle'
 import clsx from 'clsx'
+import { format } from 'date-fns'
 
 import Loader from '../../../layout/Loader'
 
@@ -21,6 +22,9 @@ import {
     PokemonHeight,
     AbilityWrap,
     AbilityInner,
+    TimeWrap,
+    TextInner,
+    TimeInner,
 } from './style'
 
 interface Props {
@@ -31,7 +35,7 @@ interface Props {
 
 const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
     //Calling helper function which is enabling tanstack-query single pokemon fetch functionality
-    const { isError, isLoading, data } = useQuery({
+    const { isError, isLoading, data, dataUpdatedAt } = useQuery({
         queryKey: ['Pokemon', pokemonId],
         queryFn: () => getPokemonSingle(pokemonId),
     })
@@ -79,6 +83,12 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                             )
                         )}
                     </AbilityWrap>
+                    <TimeWrap>
+                        <TextInner>Data fetched: &nbsp;</TextInner>
+                        <TimeInner>
+                            {format(dataUpdatedAt, 'dd MMMM yy, k:mm:ss')}
+                        </TimeInner>
+                    </TimeWrap>
                 </SinglePokemonWrap>
             )}
         </>

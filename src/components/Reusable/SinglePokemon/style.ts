@@ -88,11 +88,25 @@ export const AbilityWrap = styled.div`
 
 export const AbilityInner = styled.div`
     width: 83px;
-		margin-right: 10px;
-		margin-left; 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    margin-left; 10px;
     border: 1px solid ${color.abilityGray};
     border-radius: 20px;
     font-size: 12px;
     line-height: 14px;
     text-align: center;
+`
+
+export const TimeWrap = styled.p`
+    font-size: 12px;
+    line-height: 14px;
+`
+
+export const TextInner = styled.span`
+    color: ${color.loadingGray};
+`
+
+export const TimeInner = styled.span`
+    color: ${color.submitGray};
 `
