@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonColors } from '../../../helpers/tanStackQueryColors'
 
@@ -18,16 +19,23 @@ import {
 } from './style'
 
 interface Props {
-    onClickBtn: React.MouseEventHandler<HTMLButtonElement>
+    //onClickBtn: React.MouseEventHandler<HTMLButtonElement>
     onChangeColor: React.ChangeEventHandler<HTMLSelectElement>
 }
 
-const FilterBar = ({ onClickBtn, onChangeColor }: Props) => {
+const FilterBar = ({ onChangeColor }: Props) => {
+    const [refetchTrigger, setRefetchTrigger] = useState<boolean>(true)
+
     //Calling helper function which is enabling tanstack-query fetch available colors functionality
     const { isError, isLoading, data } = useQuery({
-        queryKey: ['colors'],
+        queryKey: ['Colors', refetchTrigger],
         queryFn: () => getPokemonColors(),
     })
+
+    //Refetch if error when trying fo get available colors for filter dropdown
+    const onClickHandler = () => {
+        setRefetchTrigger(!refetchTrigger)
+    }
 
     return (
         <FilterBarWrap>
@@ -35,7 +43,7 @@ const FilterBar = ({ onClickBtn, onChangeColor }: Props) => {
                 {isError ? (
                     <ErrorWrap>
                         <ErrorMessage>error while fetching</ErrorMessage>
-                        <FetchAgainBtn onClickBtn={onClickBtn} />
+                        <FetchAgainBtn onClickBtn={onClickHandler} />
                     </ErrorWrap>
                 ) : isLoading ? (
                     <LoadingMessage>Filter list is loading</LoadingMessage>

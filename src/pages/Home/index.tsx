@@ -18,14 +18,19 @@ const Home = () => {
 
     //Calling helper function which is enabling tanstack-query pagination and filter by color functionality
     const { isError, isLoading, data } = useQuery({
-        queryKey: ['pokemons', currentPage, selectedColor],
+        queryKey: [
+            'Pokemons',
+            'Page: ' + currentPage,
+            'Color: ' + selectedColor,
+        ],
         queryFn: () =>
             getPokemonList(coloredPokemonsCtx, currentPage, selectedColor),
     })
 
-    //Refetch if error
+    //Refetch if error when trying fo get paginated list of all pokemons
     const onClickHandler = async () => {
-        console.log('try again')
+        await setCurrentPage(0)
+        setCurrentPage(1)
     }
 
     //Testing purposes
@@ -59,7 +64,7 @@ const Home = () => {
     return (
         <HomeWrap>
             <FilterBar
-                onClickBtn={onClickHandler}
+                //onClickBtn={onClickHandler}
                 onChangeColor={onChangeHandler}
             />
             <Content
