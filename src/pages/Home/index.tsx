@@ -17,7 +17,7 @@ const Home = () => {
     const [selectedColor, setSelectedColor] = useState<number>(0)
 
     //Calling helper function which is enabling tanstack-query pagination and filter by color functionality
-    const { isError, isLoading, data } = useQuery({
+    const { isError, isLoading, data, dataUpdatedAt } = useQuery({
         queryKey: [
             'Pokemons',
             'Page: ' + currentPage,
@@ -76,6 +76,7 @@ const Home = () => {
                 isError={isError}
                 isLoading={isLoading}
                 total={data?.totalPokemons}
+                dataUpdatedAt={dataUpdatedAt}
             />
             <Pagination
                 isError={isError}

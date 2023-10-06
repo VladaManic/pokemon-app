@@ -21,6 +21,19 @@ export const ErrorMessage = styled.h2`
     color: ${color.errorRed};
 `
 
+export const TimeWrap = styled.p`
+    font-size: 14px;
+    line-height: 16px;
+`
+
+export const TextInner = styled.span`
+    color: ${color.loadingGray};
+`
+
+export const TimeInner = styled.span`
+    color: ${color.submitGray};
+`
+
 export const LoadingMessage = styled.h2`
     font-size: 14px;
     line-height: 16px;
