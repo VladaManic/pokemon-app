@@ -14,35 +14,20 @@ interface Props {
 
 const PokemonsList = ({ pokemons, selectedColor, onClick }: Props) => {
     const coloredPokemonsCtx = useContext(ColoredPokemonsContext)
+    //Mapping different data depending on if color is selected or not
+    const data =
+        selectedColor === 0 ? pokemons : coloredPokemonsCtx.pagePokemons
 
     return (
-        <>
-            {selectedColor === 0 ? (
-                <PokemonListWrap>
-                    {pokemons.map(
-                        (singlePokemon: PokemonObj, index: number) => (
-                            <PokemonItem
-                                key={index}
-                                singlePokemon={singlePokemon}
-                                onClick={onClick}
-                            />
-                        )
-                    )}
-                </PokemonListWrap>
-            ) : (
-                <PokemonListWrap>
-                    {coloredPokemonsCtx.pagePokemons.map(
-                        (singlePokemon: PokemonObj, index: number) => (
-                            <PokemonItem
-                                key={index}
-                                singlePokemon={singlePokemon}
-                                onClick={onClick}
-                            />
-                        )
-                    )}
-                </PokemonListWrap>
-            )}
-        </>
+        <PokemonListWrap>
+            {data.map((singlePokemon: PokemonObj, index: number) => (
+                <PokemonItem
+                    key={index}
+                    singlePokemon={singlePokemon}
+                    onClick={onClick}
+                />
+            ))}
+        </PokemonListWrap>
     )
 }
 

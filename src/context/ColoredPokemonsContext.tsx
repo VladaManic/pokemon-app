@@ -27,6 +27,7 @@ export const ColoredPokemonsContextProvider = ({
     >([])
     const [currentPage, setCurrentPage] = useState<number>(1)
 
+    //Setting all pokemons of concrete color in context
     const setPokemonsHandler = (pokemons: PokemonObj[]) => {
         setCurrentPokemons(pokemons)
     }

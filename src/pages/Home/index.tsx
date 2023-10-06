@@ -16,17 +16,19 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [selectedColor, setSelectedColor] = useState<number>(0)
 
-    //Calling helper function which is enabling tanstack-query pagination functionality
+    //Calling helper function which is enabling tanstack-query pagination and filter by color functionality
     const { isError, isLoading, data } = useQuery({
         queryKey: ['pokemons', currentPage, selectedColor],
         queryFn: () =>
             getPokemonList(coloredPokemonsCtx, currentPage, selectedColor),
     })
 
+    //Refetch if error
     const onClickHandler = async () => {
         console.log('try again')
     }
 
+    //Testing purposes
     const fetchData = () => {
         axios
             .get('https://pokeapi.co/api/v2/pokemon-color/1')
@@ -41,10 +43,12 @@ const Home = () => {
         fetchData()
     }, [])
 
+    //Changing current page when fetching from API with page by page
     const onPageChangeHandler = (param: number) => {
         setCurrentPage(param)
     }
 
+    //Changing selected colr when clicking in filter dropdown
     const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const id = e.currentTarget.value
         setSelectedColor(parseInt(id))

@@ -30,7 +30,7 @@ interface Props {
 }
 
 const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
-    //Calling helper function which is enabling tanstack-query pagination functionality
+    //Calling helper function which is enabling tanstack-query single pokemon fetch functionality
     const { isError, isLoading, data } = useQuery({
         queryKey: ['pokemon', pokemonId],
         queryFn: () => getPokemonSingle(pokemonId),

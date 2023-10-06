@@ -23,8 +23,10 @@ export const getPokemonList = async (
             `https://pokeapi.co/api/v2/pokemon-color/${selectedColor}`
         )
         data = await response.data
+        //Setting all pokemons of concrete color in context
         coloredPokemonsCtx.setPokemons(data.pokemon_species)
         res = data.pokemon_species.slice(0, 8)
+        //Setting layout of 8 current pokemons
         coloredPokemonsCtx.setPagePokemons(res)
         count = data.pokemon_species.length
     }

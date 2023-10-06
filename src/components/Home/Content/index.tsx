@@ -31,6 +31,7 @@ const Content = ({
     const [chosenPokemon, setChosenPokemon] = useState<number>(0)
     const [imgLoader, setImgLoader] = useState<boolean>(true)
 
+    //Clicking on pokemon from layout to open it's details
     const onClickHandler = (
         e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
     ) => {
