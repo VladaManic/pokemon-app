@@ -25,6 +25,7 @@ const Home = () => {
         ],
         queryFn: () =>
             getPokemonList(coloredPokemonsCtx, currentPage, selectedColor),
+        cacheTime: 15 * (60 * 1000), // 15 mins of caching data in local cache (if cacheTime not set, default is 5min)
     })
 
     //Refetch if error when trying fo get paginated list of all pokemons
