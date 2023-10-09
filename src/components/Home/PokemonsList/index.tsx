@@ -20,9 +20,9 @@ const PokemonsList = ({ pokemons, selectedColor, onClick }: Props) => {
 
     return (
         <PokemonListWrap>
-            {data.map((singlePokemon: PokemonObj, index: number) => (
+            {data.map((singlePokemon: PokemonObj) => (
                 <PokemonItem
-                    key={index}
+                    key={singlePokemon.name}
                     singlePokemon={singlePokemon}
                     onClick={onClick}
                 />

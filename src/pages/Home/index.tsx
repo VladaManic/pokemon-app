@@ -38,7 +38,7 @@ const Home = () => {
     //Testing purposes
     const fetchData = () => {
         axios
-            .get('https://pokeapi.co/api/v2/pokemon/1')
+            .get('https://pokeapi.co/api/v2/pokemon/')
             .then((res) => {
                 console.log(res.data)
             })
