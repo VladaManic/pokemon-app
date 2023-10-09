@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios'
 import { ColoredPokemonsCtxProps } from '../types/interfaces'
 import { PER_PAGE } from '../utils/perPage'
@@ -32,4 +33,20 @@ export const getPokemonList = async (
     }
 
     return { pokemons: res, totalPokemons: count }
+}
+
+//Fetching single pokemon data
+export const getPokemonSingle = async (pokemonId: number) => {
+    const response = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
+    )
+    const data = await response.data
+    return { pokemon: data }
+}
+
+//Fetching all available colors for dropdown
+export const getPokemonColors = async () => {
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-color/`)
+    const data = await response.data
+    return { colors: data }
 }
