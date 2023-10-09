@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useContext, useEffect } from 'react'
 import ColoredPokemonsContext from '../../context/ColoredPokemonsContext'
-import { useQuery, QueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { getPokemonList } from '../../helpers/tanStackQuery'
 import axios from 'axios'
 
@@ -55,7 +55,7 @@ const Home = () => {
         setCurrentPage(param)
     }
 
-    //Changing selected colr when clicking in filter dropdown
+    //Changing selected color when clicking in filter dropdown
     const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const id = e.currentTarget.value
         setSelectedColor(parseInt(id))
