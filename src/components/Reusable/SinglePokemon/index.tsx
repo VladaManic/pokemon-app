@@ -82,8 +82,8 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                     <PokemonHeight>abilities:</PokemonHeight>
                     <AbilityWrap>
                         {data?.pokemon.abilities.map(
-                            (singleAbility: AbilityObj, index: number) => (
-                                <AbilityInner key={index}>
+                            (singleAbility: AbilityObj) => (
+                                <AbilityInner key={singleAbility.ability.name}>
                                     {singleAbility.ability.name}
                                 </AbilityInner>
                             )

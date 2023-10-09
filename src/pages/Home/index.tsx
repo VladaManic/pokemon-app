@@ -36,19 +36,19 @@ const Home = () => {
     }
 
     //Testing purposes
-    // const fetchData = () => {
-    //     axios
-    //         .get('https://pokeapi.co/api/v2/pokemon-color/1')
-    //         .then((res) => {
-    //             console.log(res.data)
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error)
-    //         })
-    // }
-    // useEffect(() => {
-    //     fetchData()
-    // }, [])
+    const fetchData = () => {
+        axios
+            .get('https://pokeapi.co/api/v2/pokemon/1')
+            .then((res) => {
+                console.log(res.data)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+    }
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     //Changing current page when fetching from API with page by page
     const onPageChangeHandler = (param: number) => {
