@@ -32,6 +32,26 @@ export const CatchButton = styled.button`
     position: absolute;
     top: 10px;
     left: 10px;
+
+    &.disabled-btn {
+        pointer-events: none;
+        opacity: 0.3;
+    }
+`
+
+export const IdWrap = styled.div`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    box-shadow: 0 2px 2px 0 ${color.borderGray};
+`
+
+export const IdInner = styled.p`
+    margin: auto;
 `
 
 export const CatchImg = styled.img`

@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonSingle } from '../../../api/requests'
+import isStorageSupported from '../../../utils/isStorageSupported'
 import clsx from 'clsx'
 import { format } from 'date-fns'
 
@@ -14,6 +16,8 @@ import {
     SinglePokemonWrap,
     CatchButton,
     CatchImg,
+    IdWrap,
+    IdInner,
     LoaderWrap,
     PokemonImg,
     TitleWrap,
@@ -35,11 +39,44 @@ interface Props {
 }
 
 const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
+    let caughtPokemons
+    //Checking if local-storage is available
+    if (isStorageSupported('localStorage')) {
+        try {
+            //Returning from localStorage already caught pokemons
+            caughtPokemons = JSON.parse(
+                localStorage.getItem('caught-pokemons') || ''
+            )
+        } catch (err) {
+            //No caught pokemons jet
+            caughtPokemons = []
+        }
+    }
+    const [alreadyCaught, setAlreadyCaught] = useState(caughtPokemons)
+
     //Calling helper function which is enabling tanstack-query single pokemon fetch functionality
     const { isError, isLoading, data, dataUpdatedAt } = useQuery({
         queryKey: ['Pokemon', pokemonId],
         queryFn: () => getPokemonSingle(pokemonId),
     })
+
+    useEffect(() => {
+        //Adding new caught pokemon to localStorage
+        localStorage.setItem('caught-pokemons', JSON.stringify(alreadyCaught))
+    }, [alreadyCaught])
+
+    const onClickHandler = (
+        e:
+            | React.MouseEvent<HTMLButtonElement>
+            | React.TouchEvent<HTMLButtonElement>
+    ) => {
+        const id = parseInt(e.currentTarget.name)
+        //Possibility of 50%
+        const lottery = Math.random() < 0.5
+        if (lottery) {
+            setAlreadyCaught([...alreadyCaught, id])
+        }
+    }
 
     return (
         <>
@@ -49,9 +86,22 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                 <LoadingText>Selected pokemon’s data is loading...</LoadingText>
             ) : (
                 <SinglePokemonWrap>
-                    <CatchButton name={pokemonId.toString()}>
+                    <CatchButton
+                        className={clsx(
+                            alreadyCaught.filter(
+                                (id: number) => id === pokemonId
+                            ).length !== 0 && 'disabled-btn'
+                        )}
+                        name={pokemonId.toString()}
+                        onClick={onClickHandler}
+                    >
                         <CatchImg src={catchIcon} alt="Catch icon" />
                     </CatchButton>
+                    <IdWrap>
+                        <IdInner className="index-inner">
+                            {data?.pokemon.id}
+                        </IdInner>
+                    </IdWrap>
                     <LoaderWrap className={clsx(!imgLoader && 'hide')}>
                         <Loader />
                     </LoaderWrap>
