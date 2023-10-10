@@ -30,6 +30,12 @@ export const getPokemonList = async (
         //Setting layout of 8 current pokemons
         coloredPokemonsCtx.setPagePokemons(res)
         count = data.pokemon_species.length
+        //Adding array with pokemons of selected color
+        coloredPokemonsCtx.setAlreadyClickedColorPokemons(
+            selectedColor,
+            data.pokemon_species,
+            res
+        )
     }
 
     return { pokemons: res, totalPokemons: count }

@@ -1,12 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext, useState, PropsWithChildren } from 'react'
-import { ColoredPokemonsCtxProps, PokemonObj } from '../types/interfaces'
+import {
+    ColoredPokemonsCtxProps,
+    PokemonObj,
+    PokemonsByColor,
+} from '../types/interfaces'
 import { PER_PAGE } from '../utils/perPage'
 
 const ColoredPokemonsContext = createContext<ColoredPokemonsCtxProps>({
+    //All pokemons of current selected color
     pokemons: [],
+    //First 8 pokemons of current selected color
     pagePokemons: [],
+    //Selected color
     page: 1,
+    //Array with pokemons of colors that are already clicked
+    alreadyClickedColorPokemons: [],
     setPokemons: (pokemons: PokemonObj[]) => {
         null
     },
@@ -14,6 +23,13 @@ const ColoredPokemonsContext = createContext<ColoredPokemonsCtxProps>({
         null
     },
     setPage: (page: number) => {
+        null
+    },
+    setAlreadyClickedColorPokemons: (
+        id: number,
+        pokemons: PokemonObj[],
+        pagePokemos: PokemonObj[]
+    ) => {
         null
     },
 })
@@ -26,6 +42,10 @@ export const ColoredPokemonsContextProvider = ({
         PokemonObj[] | never[]
     >([])
     const [currentPage, setCurrentPage] = useState<number>(1)
+    const [
+        currentAlreadyClickedColorPokemons,
+        setCurrentAlreadyClickedColorPokemons,
+    ] = useState<PokemonsByColor[]>([])
 
     //Setting all pokemons of concrete color in context
     const setPokemonsHandler = (pokemons: PokemonObj[]) => {
@@ -46,13 +66,32 @@ export const ColoredPokemonsContextProvider = ({
         setCurrentPagePokemons(currentPokemons.slice(offset, pokemonLayout))
     }
 
+    //Setting all pokemons of color that is clicked once to 'already clicked color' array
+    const setAlreadyClickedColorPokemonsHandler = (
+        id: number,
+        pokemons: PokemonObj[],
+        pagePokemons: PokemonObj[]
+    ) => {
+        const newPokemons = [
+            ...currentAlreadyClickedColorPokemons,
+            {
+                id: id,
+                pagePokemons: pagePokemons,
+                pokemons: pokemons,
+            },
+        ]
+        setCurrentAlreadyClickedColorPokemons(newPokemons)
+    }
+
     const context = {
         pokemons: currentPokemons,
         pagePokemons: currentPagePokemons,
         page: currentPage,
+        alreadyClickedColorPokemons: currentAlreadyClickedColorPokemons,
         setPokemons: setPokemonsHandler,
         setPagePokemons: setPagePokemonsHandler,
         setPage: setPageHandler,
+        setAlreadyClickedColorPokemons: setAlreadyClickedColorPokemonsHandler,
     }
 
     return (

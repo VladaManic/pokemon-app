@@ -20,11 +20,23 @@ export type ColorObj = {
     url: string
 }
 
+export type PokemonsByColor = {
+    id: number
+    pokemons: PokemonObj[]
+    pagePokemons: PokemonObj[]
+}
+
 export interface ColoredPokemonsCtxProps {
     pokemons: PokemonObj[]
     pagePokemons: PokemonObj[]
     page: number
-    setPokemons: (data: PokemonObj[]) => void
-    setPagePokemons: (data: PokemonObj[]) => void
+    alreadyClickedColorPokemons: PokemonsByColor[]
+    setPokemons: (pokemons: PokemonObj[]) => void
+    setPagePokemons: (pokemons: PokemonObj[]) => void
     setPage: (page: number) => void
+    setAlreadyClickedColorPokemons: (
+        id: number,
+        pokemons: PokemonObj[],
+        pagePokemons: PokemonObj[]
+    ) => void
 }
