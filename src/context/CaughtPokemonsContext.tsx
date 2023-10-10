@@ -4,8 +4,8 @@ import { CaughtPokemonsCtxProps } from '../types/interfaces'
 import isStorageSupported from '../utils/isStorageSupported'
 
 const CaughtPokemonsContext = createContext<CaughtPokemonsCtxProps>({
-    caughtPokemonsCount: 0,
-    setCount: (count: number) => {
+    alreadyCaught: [],
+    setAlreadyCaught: (id: number) => {
         null
     },
 })
@@ -13,29 +13,31 @@ const CaughtPokemonsContext = createContext<CaughtPokemonsCtxProps>({
 export const CaughtPokemonsContextProvider = ({
     children,
 }: PropsWithChildren<object>) => {
-    let caughtPokemonsLength
+    let caughtPokemons
     //Checking if local-storage is available
     if (isStorageSupported('localStorage')) {
         try {
             //Returning from localStorage already caught pokemons
-            caughtPokemonsLength = JSON.parse(
+            caughtPokemons = JSON.parse(
                 localStorage.getItem('caught-pokemons') || ''
-            ).length
+            )
         } catch (err) {
             //No caught pokemons jet
-            caughtPokemonsLength = 0
+            caughtPokemons = []
         }
     }
-    const [currentCaughtPokemonsCount, setCurrentCaughtPokemonsCount] =
-        useState<number>(caughtPokemonsLength)
+    const [currentAlreadyCaught, setCurrentAlreadyCaught] = useState<
+        [] | number[]
+    >(caughtPokemons)
 
-    const setCountHandler = (count: number) => {
-        setCurrentCaughtPokemonsCount(count)
+    const setAlreadyCaughtHandler = (id: number) => {
+        //Adding new caught pokemon to already caught
+        setCurrentAlreadyCaught([...currentAlreadyCaught, id])
     }
 
     const context = {
-        caughtPokemonsCount: currentCaughtPokemonsCount,
-        setCount: setCountHandler,
+        alreadyCaught: currentAlreadyCaught,
+        setAlreadyCaught: setAlreadyCaughtHandler,
     }
 
     return (

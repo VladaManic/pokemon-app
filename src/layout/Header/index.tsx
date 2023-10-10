@@ -26,7 +26,7 @@ const Header = () => {
             {(pathname === '/home/' || pathname.includes('/pokemon/')) && (
                 <CaughtWrap>
                     <CaughtInner>
-                        {caughtPokemonsCtx.caughtPokemonsCount}
+                        {caughtPokemonsCtx.alreadyCaught.length}
                     </CaughtInner>
                 </CaughtWrap>
             )}

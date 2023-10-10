@@ -1,9 +1,8 @@
-import { useState, useEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import CaughtPokemonsContext from '../../../context/CaughtPokemonsContext'
 import { getPokemonSingle } from '../../../api/requests'
-import isStorageSupported from '../../../utils/isStorageSupported'
 import clsx from 'clsx'
 import { format } from 'date-fns'
 
@@ -41,22 +40,6 @@ interface Props {
 
 const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
     const caughtPokemonsCtx = useContext(CaughtPokemonsContext)
-    let caughtPokemons
-    //Checking if local-storage is available
-    if (isStorageSupported('localStorage')) {
-        try {
-            //Returning from localStorage already caught pokemons
-            caughtPokemons = JSON.parse(
-                localStorage.getItem('caught-pokemons') || ''
-            )
-        } catch (err) {
-            //No caught pokemons jet
-            caughtPokemons = []
-        }
-    }
-    const [alreadyCaught, setAlreadyCaught] = useState<[] | number[]>(
-        caughtPokemons
-    )
 
     //Calling helper function which is enabling tanstack-query single pokemon fetch functionality
     const { isError, isLoading, data, dataUpdatedAt } = useQuery({
@@ -66,8 +49,11 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
 
     useEffect(() => {
         //Adding new caught pokemon to localStorage
-        localStorage.setItem('caught-pokemons', JSON.stringify(alreadyCaught))
-    }, [alreadyCaught])
+        localStorage.setItem(
+            'caught-pokemons',
+            JSON.stringify(caughtPokemonsCtx.alreadyCaught)
+        )
+    }, [caughtPokemonsCtx.alreadyCaught])
 
     const onClickHandler = (
         e:
@@ -79,11 +65,7 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
         const lottery = Math.random() < 0.5
         if (lottery) {
             //Add new pokemon to state
-            setAlreadyCaught([...alreadyCaught, id])
-            //Incrementing count number in header by one
-            caughtPokemonsCtx.setCount(
-                caughtPokemonsCtx.caughtPokemonsCount + 1
-            )
+            caughtPokemonsCtx.setAlreadyCaught(id)
         }
     }
 
@@ -97,7 +79,7 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                 <SinglePokemonWrap>
                     <CatchButton
                         className={clsx(
-                            alreadyCaught.filter(
+                            caughtPokemonsCtx.alreadyCaught.filter(
                                 (id: number) => id === pokemonId
                             ).length !== 0 && 'disabled-btn'
                         )}

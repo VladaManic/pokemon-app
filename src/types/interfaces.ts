@@ -42,6 +42,6 @@ export interface ColoredPokemonsCtxProps {
 }
 
 export interface CaughtPokemonsCtxProps {
-    caughtPokemonsCount: number
-    setCount: (count: number) => void
+    alreadyCaught: [] | number[]
+    setAlreadyCaught: (id: number) => void
 }
