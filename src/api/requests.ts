@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios'
 import { ColoredPokemonsCtxProps } from '../types/interfaces'
-import { PER_PAGE } from '../utils/perPage'
+import { PER_PAGE } from '../constants/perPage'
 
 export const getPokemonList = async (
     coloredPokemonsCtx: ColoredPokemonsCtxProps,

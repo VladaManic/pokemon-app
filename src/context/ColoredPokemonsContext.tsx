@@ -5,7 +5,7 @@ import {
     PokemonObj,
     PokemonsByColor,
 } from '../types/interfaces'
-import { PER_PAGE } from '../utils/perPage'
+import { PER_PAGE } from '../constants/perPage'
 
 const ColoredPokemonsContext = createContext<ColoredPokemonsCtxProps>({
     //All pokemons of current selected color

@@ -6,18 +6,13 @@ import { ColoredPokemonsContextProvider } from './context/ColoredPokemonsContext
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-const twentyFourHoursInMs = 1000 * 60 * 60 * 24
-
 // Create a client
 const queryClient = new QueryClient({
     //Setting default paramethers for fetching data only once (if already fetched, data is called from cache)
     defaultOptions: {
         queries: {
-            refetchOnWindowFocus: false,
-            refetchOnMount: false,
-            refetchOnReconnect: false,
-            retry: false,
-            staleTime: twentyFourHoursInMs,
+            cacheTime: Infinity,
+            staleTime: Infinity,
         },
     },
 })

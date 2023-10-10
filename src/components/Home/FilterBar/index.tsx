@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { getPokemonColors } from '../../../helpers/tanStackQuery'
+import { getPokemonColors } from '../../../api/requests'
 
 import FetchAgainBtn from '../../Reusable/FetchAgainBtn'
 

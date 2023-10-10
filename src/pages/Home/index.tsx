@@ -2,7 +2,7 @@
 import { useState, useContext, useEffect } from 'react'
 import ColoredPokemonsContext from '../../context/ColoredPokemonsContext'
 import { useQuery } from '@tanstack/react-query'
-import { getPokemonList } from '../../helpers/tanStackQuery'
+import { getPokemonList } from '../../api/requests'
 import axios from 'axios'
 
 import FilterBar from '../../components/Home/FilterBar'
@@ -49,7 +49,7 @@ const Home = () => {
     // }
     // useEffect(() => {
     //     //fetchData()
-    // }, [selectedColor])
+    // }, [])
 
     //Changing current page when fetching from API with page by page
     const onPageChangeHandler = (param: number) => {

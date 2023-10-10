@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { getPokemonSingle } from '../../../helpers/tanStackQuery'
+import { getPokemonSingle } from '../../../api/requests'
 import clsx from 'clsx'
 import { format } from 'date-fns'
 

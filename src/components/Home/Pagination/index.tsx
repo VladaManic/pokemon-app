@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import ColoredPokemonsContext from '../../../context/ColoredPokemonsContext'
 import clsx from 'clsx'
-import { PER_PAGE } from '../../../utils/perPage'
+import { PER_PAGE } from '../../../constants/perPage'
 
 import prevIcon from '../../../assets/img/prev-icon.svg'
 import nextIcon from '../../../assets/img/next-icon.svg'
