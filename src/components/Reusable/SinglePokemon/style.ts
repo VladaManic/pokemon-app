@@ -32,10 +32,15 @@ export const CatchButton = styled.button`
     position: absolute;
     top: 10px;
     left: 10px;
+    transition: all 0.4s ease;
 
     &.disabled-btn {
         pointer-events: none;
         opacity: 0.3;
+    }
+
+    &:hover {
+        opacity: 0.7;
     }
 `
 
