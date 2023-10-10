@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import isStorageSupported from '../../utils/isStorageSupported'
 import clsx from 'clsx'
 
-import { FormData } from '../../types/interfaces'
 import {
     LocalStorageErrorWrap,
     FormWrap,
@@ -14,6 +13,7 @@ import {
     ErrorWrap,
     NotificationWrap,
 } from './style'
+import { FormData } from '../../types/interfaces'
 
 const Login = () => {
     const navigate = useNavigate()
@@ -21,15 +21,18 @@ const Login = () => {
     //localStorage.clear()
 
     useEffect(() => {
+        //Checking if local-storage is available
         if (!isStorageSupported('localStorage')) {
             setLocalStorageError('No local storage is available!')
         } else {
+            //Redirecting to Home page if user is loged in once
             if (localStorage.getItem('pokemon-app') !== null) {
                 navigate('/home/')
             }
         }
     }, [])
 
+    //Setting validation form rules
     const schema: ZodType<FormData> = z.object({
         fullname: z
             .string()
@@ -47,6 +50,7 @@ const Login = () => {
         resolver: zodResolver(schema),
     })
 
+    //On submit, set data to local-storage (if available) and redirect to Home page
     const submitData = (data: FormData) => {
         isStorageSupported('localStorage')
             ? localStorage.setItem('pokemon-app', JSON.stringify(data))
