@@ -40,3 +40,8 @@ export interface ColoredPokemonsCtxProps {
         pagePokemons: PokemonObj[]
     ) => void
 }
+
+export interface CaughtPokemonsCtxProps {
+    caughtPokemonsCount: number
+    setCount: (count: number) => void
+}

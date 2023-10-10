@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
+import CaughtPokemonsContext from '../../../context/CaughtPokemonsContext'
 import { getPokemonSingle } from '../../../api/requests'
 import isStorageSupported from '../../../utils/isStorageSupported'
 import clsx from 'clsx'
@@ -39,6 +40,7 @@ interface Props {
 }
 
 const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
+    const caughtPokemonsCtx = useContext(CaughtPokemonsContext)
     let caughtPokemons
     //Checking if local-storage is available
     if (isStorageSupported('localStorage')) {
@@ -52,7 +54,9 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
             caughtPokemons = []
         }
     }
-    const [alreadyCaught, setAlreadyCaught] = useState(caughtPokemons)
+    const [alreadyCaught, setAlreadyCaught] = useState<[] | number[]>(
+        caughtPokemons
+    )
 
     //Calling helper function which is enabling tanstack-query single pokemon fetch functionality
     const { isError, isLoading, data, dataUpdatedAt } = useQuery({
@@ -74,7 +78,12 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
         //Possibility of 50%
         const lottery = Math.random() < 0.5
         if (lottery) {
+            //Add new pokemon to state
             setAlreadyCaught([...alreadyCaught, id])
+            //Incrementing count number in header by one
+            caughtPokemonsCtx.setCount(
+                caughtPokemonsCtx.caughtPokemonsCount + 1
+            )
         }
     }
 
