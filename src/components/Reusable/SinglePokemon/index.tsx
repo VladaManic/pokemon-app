@@ -41,7 +41,7 @@ interface Props {
 }
 
 const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
-    const [catchingInitiated, setCatchingInitiated] = useState<boolean>(false)
+    const [catchingLoading, setCatchingLoading] = useState<boolean>(true)
     const caughtPokemonsCtx = useContext(CaughtPokemonsContext)
 
     //Calling helper function which is enabling tanstack-query single pokemon fetch functionality
@@ -65,11 +65,11 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
             | React.TouchEvent<HTMLButtonElement>
     ) => {
         const id = parseInt(e.currentTarget.name)
-        setCatchingInitiated(true)
+        //Possibility of 50%
+        const lottery = Math.random() < 0.5
+        setCatchingLoading(true)
         setTimeout(() => {
-            setCatchingInitiated(false)
-            //Possibility of 50%
-            const lottery = Math.random() < 0.5
+            setCatchingLoading(false)
             if (lottery) {
                 //Add new pokemon to state
                 caughtPokemonsCtx.setAlreadyCaught(id)
@@ -90,7 +90,7 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                             caughtPokemonsCtx.alreadyCaught.filter(
                                 (id: number) => id === pokemonId
                             ).length !== 0 && 'disabled-btn',
-                            catchingInitiated && 'temporary-disabled'
+                            catchingLoading && 'temporary-disabled'
                         )}
                         name={pokemonId.toString()}
                         onClick={onClickHandler}
@@ -140,7 +140,7 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                         )}
                     </AbilityWrap>
                     <InitiateWrap>
-                        {catchingInitiated && (
+                        {catchingLoading && (
                             <PokeballIcon
                                 src={catchIcon}
                                 alt="Pokeball loader"

@@ -155,6 +155,8 @@ export const InitiateWrap = styled.div`
 `
 
 export const PokeballIcon = styled.img`
+    width: 70px;
+    height: 70px;
     -webkit-animation: spin 4s linear infinite;
     -moz-animation: spin 4s linear infinite;
     animation: spin 4s linear infinite;
