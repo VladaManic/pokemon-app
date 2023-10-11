@@ -34,6 +34,7 @@ import {
     SuccessText,
     SuccessTime,
     FailWrap,
+    FullStorage,
     TimeWrap,
     TextInner,
     TimeInner,
@@ -109,7 +110,9 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                             caughtPokemonsCtx.alreadyCaught.filter(
                                 (id: number) => id === pokemonId
                             ).length !== 0 && 'disabled-btn',
-                            catchingLoading && 'temporary-disabled'
+                            catchingLoading && 'temporary-disabled',
+                            caughtPokemonsCtx.alreadyCaught.length === 9 &&
+                                'temporary-disabled'
                         )}
                         name={pokemonId.toString()}
                         onClick={onClickHandler}
@@ -175,9 +178,8 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                         <InitiateWrap>
                             {catchingSuccess ? (
                                 <SuccessWrap>
-                                    <SuccessText>catched:</SuccessText>
+                                    <SuccessText>catched:&nbsp;</SuccessText>
                                     <SuccessTime>
-                                        &nbsp;
                                         {format(catchTime, 'dd MMMM yy, k:mm')}
                                     </SuccessTime>
                                 </SuccessWrap>
@@ -186,8 +188,13 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                             )}
                         </InitiateWrap>
                     )}
+                    {caughtPokemonsCtx.alreadyCaught.length === 9 && (
+                        <InitiateWrap>
+                            <FullStorage>Poke Storage full!</FullStorage>
+                        </InitiateWrap>
+                    )}
                     <TimeWrap>
-                        <TextInner>Data fetched: &nbsp;</TextInner>
+                        <TextInner>Data fetched:&nbsp;</TextInner>
                         <TimeInner>
                             {format(dataUpdatedAt, 'dd MMMM yy, k:mm:ss')}
                         </TimeInner>

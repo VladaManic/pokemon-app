@@ -187,6 +187,13 @@ export const FailWrap = styled.div`
     color: ${color.failRed};
 `
 
+export const FullStorage = styled.p`
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 700;
+    color: ${color.submitGray};
+`
+
 export const TimeWrap = styled.p`
     font-size: 12px;
     line-height: 14px;
