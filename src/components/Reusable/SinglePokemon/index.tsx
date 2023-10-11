@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import CaughtPokemonsContext from '../../../context/CaughtPokemonsContext'
@@ -26,6 +26,8 @@ import {
     PokemonHeight,
     AbilityWrap,
     AbilityInner,
+    InitiateWrap,
+    PokeballIcon,
     TimeWrap,
     TextInner,
     TimeInner,
@@ -39,6 +41,7 @@ interface Props {
 }
 
 const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
+    const [catchingInitiated, setCatchingInitiated] = useState<boolean>(false)
     const caughtPokemonsCtx = useContext(CaughtPokemonsContext)
 
     //Calling helper function which is enabling tanstack-query single pokemon fetch functionality
@@ -55,18 +58,23 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
         )
     }, [caughtPokemonsCtx.alreadyCaught])
 
+    //Click on catch btn
     const onClickHandler = (
         e:
             | React.MouseEvent<HTMLButtonElement>
             | React.TouchEvent<HTMLButtonElement>
     ) => {
         const id = parseInt(e.currentTarget.name)
-        //Possibility of 50%
-        const lottery = Math.random() < 0.5
-        if (lottery) {
-            //Add new pokemon to state
-            caughtPokemonsCtx.setAlreadyCaught(id)
-        }
+        setCatchingInitiated(true)
+        setTimeout(() => {
+            setCatchingInitiated(false)
+            //Possibility of 50%
+            const lottery = Math.random() < 0.5
+            if (lottery) {
+                //Add new pokemon to state
+                caughtPokemonsCtx.setAlreadyCaught(id)
+            }
+        }, 3000)
     }
 
     return (
@@ -81,7 +89,8 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                         className={clsx(
                             caughtPokemonsCtx.alreadyCaught.filter(
                                 (id: number) => id === pokemonId
-                            ).length !== 0 && 'disabled-btn'
+                            ).length !== 0 && 'disabled-btn',
+                            catchingInitiated && 'temporary-disabled'
                         )}
                         name={pokemonId.toString()}
                         onClick={onClickHandler}
@@ -130,6 +139,14 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                             )
                         )}
                     </AbilityWrap>
+                    <InitiateWrap>
+                        {catchingInitiated && (
+                            <PokeballIcon
+                                src={catchIcon}
+                                alt="Pokeball loader"
+                            />
+                        )}
+                    </InitiateWrap>
                     <TimeWrap>
                         <TextInner>Data fetched: &nbsp;</TextInner>
                         <TimeInner>

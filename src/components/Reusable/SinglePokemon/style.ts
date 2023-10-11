@@ -34,13 +34,18 @@ export const CatchButton = styled.button`
     left: 10px;
     transition: all 0.4s ease;
 
-    &.disabled-btn {
+    &.temporary-disabled {
         pointer-events: none;
         opacity: 0.3;
     }
 
+    &.disabled-btn {
+        pointer-events: none;
+        opacity: 0;
+    }
+
     &:hover {
-        opacity: 0.7;
+        opacity: 0.6;
     }
 `
 
@@ -127,6 +132,32 @@ export const AbilityInner = styled.div`
     font-size: 12px;
     line-height: 14px;
     text-align: center;
+`
+
+export const InitiateWrap = styled.div`
+    margin: 15px auto;
+    @-moz-keyframes spin {
+        100% {
+            -moz-transform: rotate(360deg);
+        }
+    }
+    @-webkit-keyframes spin {
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    @keyframes spin {
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+`
+
+export const PokeballIcon = styled.img`
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 4s linear infinite;
 `
 
 export const TimeWrap = styled.p`
