@@ -44,8 +44,6 @@ export interface ColoredPokemonsCtxProps {
 export interface CaughtPokemonsCtxProps {
     alreadyCaught: [] | number[]
     catchingDone: boolean
-    catchingSuccess: boolean
     setAlreadyCaught: (id: number) => void
     setCatchingDone: (param: boolean) => void
-    setCatchingSuccess: (param: boolean) => void
 }
