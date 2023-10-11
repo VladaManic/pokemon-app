@@ -8,7 +8,8 @@ import { format } from 'date-fns'
 
 import Loader from '../../../components/Reusable/Loader'
 
-import catchIcon from '../../../assets/img/catch.svg'
+import CatchIcon from '../../../assets/img/catch.svg'
+import SuccessIcon from '../../../assets/img/successfully-caught.svg'
 import LinkIcon from '../../../assets/img/open-link.svg'
 import {
     ErrorWrap,
@@ -21,6 +22,7 @@ import {
     LoaderWrap,
     PokemonImg,
     TitleWrap,
+    CaughtImg,
     PokemonName,
     LinkImg,
     PokemonHeight,
@@ -80,7 +82,7 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
             setCatchingLoading(false)
             caughtPokemonsCtx.setCatchingDone(true)
             if (lottery) {
-                //Add new pokemon to state
+                //Add new pokemon to array of already caught
                 caughtPokemonsCtx.setAlreadyCaught(id)
                 //Success message set
                 setCatchingSuccess(true)
@@ -112,7 +114,7 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                         name={pokemonId.toString()}
                         onClick={onClickHandler}
                     >
-                        <CatchImg src={catchIcon} alt="Catch icon" />
+                        <CatchImg src={CatchIcon} alt="Catch icon" />
                     </CatchButton>
                     <IdWrap>
                         <IdInner className="index-inner">
@@ -132,6 +134,11 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                         className={clsx(imgLoader && 'hide')}
                     />
                     <TitleWrap>
+                        {caughtPokemonsCtx.alreadyCaught.filter(
+                            (id: number) => id === pokemonId
+                        ).length !== 0 && (
+                            <CaughtImg src={SuccessIcon} alt="Success icon" />
+                        )}
                         <PokemonName>{data?.pokemon.name}</PokemonName>
                         <NavLink
                             to={`/pokemon/${data?.pokemon.name}`}
@@ -159,7 +166,7 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                     {catchingLoading && (
                         <InitiateWrap>
                             <PokeballIcon
-                                src={catchIcon}
+                                src={CatchIcon}
                                 alt="Pokeball loader"
                             />
                         </InitiateWrap>

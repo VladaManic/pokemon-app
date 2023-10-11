@@ -98,6 +98,10 @@ export const TitleWrap = styled.div`
     }
 `
 
+export const CaughtImg = styled.img`
+    margin-right: 5px;
+`
+
 export const PokemonName = styled.h2`
     font-size: 20px;
     line-height: 23px;
