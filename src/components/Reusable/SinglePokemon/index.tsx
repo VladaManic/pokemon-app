@@ -28,6 +28,10 @@ import {
     AbilityInner,
     InitiateWrap,
     PokeballIcon,
+    SuccessWrap,
+    SuccessText,
+    SuccessTime,
+    FailWrap,
     TimeWrap,
     TextInner,
     TimeInner,
@@ -41,7 +45,9 @@ interface Props {
 }
 
 const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
-    const [catchingLoading, setCatchingLoading] = useState<boolean>(true)
+    const [catchingLoading, setCatchingLoading] = useState<boolean>(false)
+    const [catchingSuccess, setCatchingSuccess] = useState<boolean>(true)
+    const [catchTime, setCatchTime] = useState<Date | number>(0)
     const caughtPokemonsCtx = useContext(CaughtPokemonsContext)
 
     //Calling helper function which is enabling tanstack-query single pokemon fetch functionality
@@ -68,11 +74,22 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
         //Possibility of 50%
         const lottery = Math.random() < 0.5
         setCatchingLoading(true)
+        //Reset catching process for new try
+        caughtPokemonsCtx.setCatchingDone(false)
         setTimeout(() => {
             setCatchingLoading(false)
+            caughtPokemonsCtx.setCatchingDone(true)
             if (lottery) {
                 //Add new pokemon to state
                 caughtPokemonsCtx.setAlreadyCaught(id)
+                //Success message set
+                setCatchingSuccess(true)
+                //Setting current time as time of catching
+                const now = new Date()
+                setCatchTime(now)
+            } else {
+                //Fail message set
+                setCatchingSuccess(false)
             }
         }, 3000)
     }
@@ -139,14 +156,29 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
                             )
                         )}
                     </AbilityWrap>
-                    <InitiateWrap>
-                        {catchingLoading && (
+                    {catchingLoading && (
+                        <InitiateWrap>
                             <PokeballIcon
                                 src={catchIcon}
                                 alt="Pokeball loader"
                             />
-                        )}
-                    </InitiateWrap>
+                        </InitiateWrap>
+                    )}
+                    {caughtPokemonsCtx.catchingDone && (
+                        <InitiateWrap>
+                            {catchingSuccess ? (
+                                <SuccessWrap>
+                                    <SuccessText>catched:</SuccessText>
+                                    <SuccessTime>
+                                        &nbsp;
+                                        {format(catchTime, 'dd MMMM yy, k:mm')}
+                                    </SuccessTime>
+                                </SuccessWrap>
+                            ) : (
+                                <FailWrap>catching failed, try again</FailWrap>
+                            )}
+                        </InitiateWrap>
+                    )}
                     <TimeWrap>
                         <TextInner>Data fetched: &nbsp;</TextInner>
                         <TimeInner>

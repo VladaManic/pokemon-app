@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import CaughtPokemonsContext from '../../../context/CaughtPokemonsContext'
 
 import FetchAgainBtn from '../../Reusable/FetchAgainBtn'
 import PokemonsList from '../PokemonsList'
@@ -30,6 +31,7 @@ const Content = ({
 }: Props) => {
     const [chosenPokemon, setChosenPokemon] = useState<number>(0)
     const [imgLoader, setImgLoader] = useState<boolean>(true)
+    const caughtPokemonsCtx = useContext(CaughtPokemonsContext)
 
     //Clicking on pokemon from layout to open it's details
     const onClickHandler = (
@@ -38,6 +40,8 @@ const Content = ({
         const id = parseInt(e.currentTarget.id)
         setChosenPokemon(id)
         setImgLoader(true)
+        //Reset catching process for try with new pokemon
+        caughtPokemonsCtx.setCatchingDone(false)
     }
 
     return (

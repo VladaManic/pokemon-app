@@ -17,4 +17,6 @@ export const color = {
     loaderBlue: '#87ace8',
     heightGray: '#656565',
     abilityGray: '#ECECEC',
+    successGreen: '#009D38',
+    failRed: '#FF1C1C',
 }

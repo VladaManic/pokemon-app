@@ -125,7 +125,7 @@ export const AbilityWrap = styled.div`
 export const AbilityInner = styled.div`
     width: 83px;
     margin-right: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     margin-left; 10px;
     border: 1px solid ${color.abilityGray};
     border-radius: 20px;
@@ -135,7 +135,7 @@ export const AbilityInner = styled.div`
 `
 
 export const InitiateWrap = styled.div`
-    margin: 15px auto;
+    margin: 0 auto 25px auto;
     @-moz-keyframes spin {
         100% {
             -moz-transform: rotate(360deg);
@@ -160,6 +160,27 @@ export const PokeballIcon = styled.img`
     -webkit-animation: spin 4s linear infinite;
     -moz-animation: spin 4s linear infinite;
     animation: spin 4s linear infinite;
+`
+
+export const SuccessWrap = styled.div`
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 700;
+`
+
+export const SuccessText = styled.span`
+    color: ${color.successGreen};
+`
+
+export const SuccessTime = styled.span`
+    font-weight: 400;
+`
+
+export const FailWrap = styled.div`
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 700;
+    color: ${color.failRed};
 `
 
 export const TimeWrap = styled.p`
