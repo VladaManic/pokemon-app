@@ -18,7 +18,7 @@ import { FormData } from '../../types/interfaces'
 const Login = () => {
     const navigate = useNavigate()
     const [localStorageError, setLocalStorageError] = useState<string>('')
-    localStorage.clear()
+    //localStorage.clear()
 
     useEffect(() => {
         //Checking if local-storage is available
