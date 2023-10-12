@@ -41,7 +41,7 @@ export type PokemonsByColor = {
     pagePokemons: PokemonObj[]
 }
 
-export interface ColoredPokemonsCtxProps {
+export type ColoredPokemonsCtxProps = {
     pokemons: PokemonObj[]
     pagePokemons: PokemonObj[]
     page: number
@@ -56,9 +56,16 @@ export interface ColoredPokemonsCtxProps {
     ) => void
 }
 
-export interface CaughtPokemonsCtxProps {
-    alreadyCaught: [] | number[]
+export type CaughtPokemon = {
+    id: number
+    url: string
+    name: string
+    timeCaught: Date | number
+}
+
+export type CaughtPokemonsCtxProps = {
+    alreadyCaught: [] | CaughtPokemon[]
     catchingDone: boolean
-    setAlreadyCaught: (id: number) => void
+    setAlreadyCaught: (data: CaughtPokemon) => void
     setCatchingDone: (param: boolean) => void
 }

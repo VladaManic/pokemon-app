@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext, useState, PropsWithChildren } from 'react'
-import { CaughtPokemonsCtxProps } from '../types/interfaces'
+import { CaughtPokemonsCtxProps, CaughtPokemon } from '../types/interfaces'
 import isStorageSupported from '../utils/isStorageSupported'
 
 const CaughtPokemonsContext = createContext<CaughtPokemonsCtxProps>({
     alreadyCaught: [],
     catchingDone: false,
-    setAlreadyCaught: (id: number) => {
+    setAlreadyCaught: (data: CaughtPokemon) => {
         null
     },
     setCatchingDone: (param: boolean) => {
@@ -31,14 +31,14 @@ export const CaughtPokemonsContextProvider = ({
         }
     }
     const [currentAlreadyCaught, setCurrentAlreadyCaught] = useState<
-        [] | number[]
+        [] | CaughtPokemon[]
     >(caughtPokemons)
     const [currentCatchingDone, setCurrentCatchingDone] =
         useState<boolean>(false)
 
-    const setAlreadyCaughtHandler = (id: number) => {
+    const setAlreadyCaughtHandler = (data: CaughtPokemon) => {
         //Adding new caught pokemon to already caught
-        setCurrentAlreadyCaught([...currentAlreadyCaught, id])
+        setCurrentAlreadyCaught([...currentAlreadyCaught, data])
     }
 
     //Is caching process done

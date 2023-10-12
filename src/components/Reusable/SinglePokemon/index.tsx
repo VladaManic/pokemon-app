@@ -35,7 +35,11 @@ import {
     TextInner,
     TimeInner,
 } from './style'
-import { SinglePokemonObj, AbilityObj } from '../../../types/interfaces'
+import {
+    SinglePokemonObj,
+    AbilityObj,
+    CaughtPokemon,
+} from '../../../types/interfaces'
 
 interface Props {
     pokemonId: number
@@ -84,7 +88,13 @@ const SinglePokemon = ({
             caughtPokemonsCtx.setCatchingDone(true)
             if (lottery) {
                 //Add new pokemon to array of already caught
-                caughtPokemonsCtx.setAlreadyCaught(id)
+                const pokemonData = {
+                    id: id,
+                    url: data?.pokemon.sprites.other.dream_world.front_default,
+                    name: data?.pokemon.name,
+                    timeCaught: dataUpdatedAt,
+                }
+                caughtPokemonsCtx.setAlreadyCaught(pokemonData)
                 //Success message set
                 setCatchingSuccess(true)
                 //Setting current time as time of catching
@@ -97,12 +107,18 @@ const SinglePokemon = ({
         }, 3000)
     }
 
+    //On click link which redirects to single page, reset catching of previous pokemon
+    const onClickLink = () => {
+        caughtPokemonsCtx.setCatchingDone(false)
+    }
+
     return (
         <SinglePokemonWrap>
             <CatchButton
                 className={clsx(
                     caughtPokemonsCtx.alreadyCaught.filter(
-                        (id: number) => id === pokemonId
+                        (singlePokemon: CaughtPokemon) =>
+                            singlePokemon.id === pokemonId
                     ).length !== 0 && 'disabled-btn',
                     catchingLoading && 'temporary-disabled',
                     caughtPokemonsCtx.alreadyCaught.length === 9 &&
@@ -127,7 +143,8 @@ const SinglePokemon = ({
             />
             <TitleWrap>
                 {caughtPokemonsCtx.alreadyCaught.filter(
-                    (id: number) => id === pokemonId
+                    (singlePokemon: CaughtPokemon) =>
+                        singlePokemon.id === pokemonId
                 ).length !== 0 && (
                     <CaughtImg src={SuccessIcon} alt="Success icon" />
                 )}
@@ -136,6 +153,7 @@ const SinglePokemon = ({
                     <NavLink
                         to={`/pokemon/${data?.pokemon.name}`}
                         className="nav-link"
+                        onClick={onClickLink}
                     >
                         <LinkImg src={LinkIcon} alt={data?.pokemon.name} />
                     </NavLink>
