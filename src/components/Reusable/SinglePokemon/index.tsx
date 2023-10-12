@@ -1,8 +1,6 @@
 import { useEffect, useContext, useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useLocation, NavLink } from 'react-router-dom'
 import CaughtPokemonsContext from '../../../context/CaughtPokemonsContext'
-import { getPokemonSingle } from '../../../api/requests'
 import clsx from 'clsx'
 import { format } from 'date-fns'
 
@@ -12,8 +10,6 @@ import CatchIcon from '../../../assets/img/catch.svg'
 import SuccessIcon from '../../../assets/img/successfully-caught.svg'
 import LinkIcon from '../../../assets/img/open-link.svg'
 import {
-    ErrorWrap,
-    LoadingText,
     SinglePokemonWrap,
     CatchButton,
     CatchImg,
@@ -39,25 +35,29 @@ import {
     TextInner,
     TimeInner,
 } from './style'
-import { AbilityObj } from '../../../types/interfaces'
+import { SinglePokemonObj, AbilityObj } from '../../../types/interfaces'
 
 interface Props {
     pokemonId: number
     imgLoader: boolean
     onLoadImg: () => void
+    data: SinglePokemonObj
+    dataUpdatedAt: number
 }
 
-const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
+const SinglePokemon = ({
+    pokemonId,
+    imgLoader,
+    onLoadImg,
+    data,
+    dataUpdatedAt,
+}: Props) => {
     const [catchingLoading, setCatchingLoading] = useState<boolean>(false)
     const [catchingSuccess, setCatchingSuccess] = useState<boolean>(true)
     const [catchTime, setCatchTime] = useState<Date | number>(0)
     const caughtPokemonsCtx = useContext(CaughtPokemonsContext)
-
-    //Calling helper function which is enabling tanstack-query single pokemon fetch functionality
-    const { isError, isLoading, data, dataUpdatedAt } = useQuery({
-        queryKey: ['Pokemon', pokemonId],
-        queryFn: () => getPokemonSingle(pokemonId),
-    })
+    //Get URL
+    const { pathname } = useLocation()
 
     useEffect(() => {
         //Adding new caught pokemon to localStorage
@@ -98,110 +98,90 @@ const SinglePokemon = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
     }
 
     return (
-        <>
-            {isError ? (
-                <ErrorWrap>Error, data fetching failed</ErrorWrap>
-            ) : isLoading ? (
-                <LoadingText>Selected pokemon’s data is loading...</LoadingText>
-            ) : (
-                <SinglePokemonWrap>
-                    <CatchButton
-                        className={clsx(
-                            caughtPokemonsCtx.alreadyCaught.filter(
-                                (id: number) => id === pokemonId
-                            ).length !== 0 && 'disabled-btn',
-                            catchingLoading && 'temporary-disabled',
-                            caughtPokemonsCtx.alreadyCaught.length === 9 &&
-                                'temporary-disabled'
-                        )}
-                        name={pokemonId.toString()}
-                        onClick={onClickHandler}
+        <SinglePokemonWrap>
+            <CatchButton
+                className={clsx(
+                    caughtPokemonsCtx.alreadyCaught.filter(
+                        (id: number) => id === pokemonId
+                    ).length !== 0 && 'disabled-btn',
+                    catchingLoading && 'temporary-disabled',
+                    caughtPokemonsCtx.alreadyCaught.length === 9 &&
+                        'temporary-disabled'
+                )}
+                name={pokemonId.toString()}
+                onClick={onClickHandler}
+            >
+                <CatchImg src={CatchIcon} alt="Catch icon" />
+            </CatchButton>
+            <IdWrap>
+                <IdInner className="index-inner">{data?.pokemon.id}</IdInner>
+            </IdWrap>
+            <LoaderWrap className={clsx(!imgLoader && 'hide')}>
+                <Loader />
+            </LoaderWrap>
+            <PokemonImg
+                src={data?.pokemon.sprites.other.dream_world.front_default}
+                alt={data?.pokemon.name}
+                onLoad={onLoadImg}
+                className={clsx(imgLoader && 'hide')}
+            />
+            <TitleWrap>
+                {caughtPokemonsCtx.alreadyCaught.filter(
+                    (id: number) => id === pokemonId
+                ).length !== 0 && (
+                    <CaughtImg src={SuccessIcon} alt="Success icon" />
+                )}
+                <PokemonName>{data?.pokemon.name}</PokemonName>
+                {!pathname.includes('/pokemon/') && (
+                    <NavLink
+                        to={`/pokemon/${data?.pokemon.name}`}
+                        className="nav-link"
                     >
-                        <CatchImg src={CatchIcon} alt="Catch icon" />
-                    </CatchButton>
-                    <IdWrap>
-                        <IdInner className="index-inner">
-                            {data?.pokemon.id}
-                        </IdInner>
-                    </IdWrap>
-                    <LoaderWrap className={clsx(!imgLoader && 'hide')}>
-                        <Loader />
-                    </LoaderWrap>
-                    <PokemonImg
-                        src={
-                            data?.pokemon.sprites.other.dream_world
-                                .front_default
-                        }
-                        alt={data?.pokemon.name}
-                        onLoad={onLoadImg}
-                        className={clsx(imgLoader && 'hide')}
-                    />
-                    <TitleWrap>
-                        {caughtPokemonsCtx.alreadyCaught.filter(
-                            (id: number) => id === pokemonId
-                        ).length !== 0 && (
-                            <CaughtImg src={SuccessIcon} alt="Success icon" />
-                        )}
-                        <PokemonName>{data?.pokemon.name}</PokemonName>
-                        <NavLink
-                            to={`/pokemon/${data?.pokemon.name}`}
-                            className="nav-link"
-                        >
-                            <LinkImg src={LinkIcon} alt={data?.pokemon.name} />
-                        </NavLink>
-                    </TitleWrap>
-                    <PokemonHeight>
-                        height: {data?.pokemon.height}
-                    </PokemonHeight>
-                    <PokemonHeight>
-                        weight: {data?.pokemon.weight}
-                    </PokemonHeight>
-                    <PokemonHeight>abilities:</PokemonHeight>
-                    <AbilityWrap>
-                        {data?.pokemon.abilities.map(
-                            (singleAbility: AbilityObj) => (
-                                <AbilityInner key={singleAbility.ability.name}>
-                                    {singleAbility.ability.name}
-                                </AbilityInner>
-                            )
-                        )}
-                    </AbilityWrap>
-                    {catchingLoading && (
-                        <InitiateWrap>
-                            <PokeballIcon
-                                src={CatchIcon}
-                                alt="Pokeball loader"
-                            />
-                        </InitiateWrap>
-                    )}
-                    {caughtPokemonsCtx.catchingDone && (
-                        <InitiateWrap>
-                            {catchingSuccess ? (
-                                <SuccessWrap>
-                                    <SuccessText>catched:&nbsp;</SuccessText>
-                                    <SuccessTime>
-                                        {format(catchTime, 'dd MMMM yy, k:mm')}
-                                    </SuccessTime>
-                                </SuccessWrap>
-                            ) : (
-                                <FailWrap>catching failed, try again</FailWrap>
-                            )}
-                        </InitiateWrap>
-                    )}
-                    {caughtPokemonsCtx.alreadyCaught.length === 9 && (
-                        <InitiateWrap>
-                            <FullStorage>Poke Storage full!</FullStorage>
-                        </InitiateWrap>
-                    )}
-                    <TimeWrap>
-                        <TextInner>Data fetched:&nbsp;</TextInner>
-                        <TimeInner>
-                            {format(dataUpdatedAt, 'dd MMMM yy, k:mm:ss')}
-                        </TimeInner>
-                    </TimeWrap>
-                </SinglePokemonWrap>
+                        <LinkImg src={LinkIcon} alt={data?.pokemon.name} />
+                    </NavLink>
+                )}
+            </TitleWrap>
+            <PokemonHeight>height: {data?.pokemon.height}</PokemonHeight>
+            <PokemonHeight>weight: {data?.pokemon.weight}</PokemonHeight>
+            <PokemonHeight>abilities:</PokemonHeight>
+            <AbilityWrap>
+                {data?.pokemon.abilities.map((singleAbility: AbilityObj) => (
+                    <AbilityInner key={singleAbility.ability.name}>
+                        {singleAbility.ability.name}
+                    </AbilityInner>
+                ))}
+            </AbilityWrap>
+            {catchingLoading && (
+                <InitiateWrap>
+                    <PokeballIcon src={CatchIcon} alt="Pokeball loader" />
+                </InitiateWrap>
             )}
-        </>
+            {caughtPokemonsCtx.catchingDone && (
+                <InitiateWrap>
+                    {catchingSuccess ? (
+                        <SuccessWrap>
+                            <SuccessText>catched:&nbsp;</SuccessText>
+                            <SuccessTime>
+                                {format(catchTime, 'dd MMMM yy, k:mm')}
+                            </SuccessTime>
+                        </SuccessWrap>
+                    ) : (
+                        <FailWrap>catching failed, try again</FailWrap>
+                    )}
+                </InitiateWrap>
+            )}
+            {caughtPokemonsCtx.alreadyCaught.length === 9 && (
+                <InitiateWrap>
+                    <FullStorage>Poke Storage full!</FullStorage>
+                </InitiateWrap>
+            )}
+            <TimeWrap>
+                <TextInner>Data fetched:&nbsp;</TextInner>
+                <TimeInner>
+                    {format(dataUpdatedAt, 'dd MMMM yy, k:mm:ss')}
+                </TimeInner>
+            </TimeWrap>
+        </SinglePokemonWrap>
     )
 }
 

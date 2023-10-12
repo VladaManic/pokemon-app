@@ -1,31 +1,11 @@
 import styled from 'styled-components'
 import { color } from '../../../shared/styles/variables'
 
-export const ErrorWrap = styled.h2`
-    margin: auto;
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: 400;
-    color: ${color.errorRed};
-`
-
-export const LoadingText = styled.div`
-    width: 180px;
-    margin: auto;
-    font-size: 19px;
-    line-height: 22px;
-    font-weight: 400;
-    color: ${color.detailsGray};
-    text-align: center;
-`
-
 export const SinglePokemonWrap = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-right: 30px;
-    padding-left: 30px;
 `
 
 export const CatchButton = styled.button`
@@ -113,6 +93,7 @@ export const LinkImg = styled.img`
 `
 
 export const PokemonHeight = styled.p`
+    padding-left: 30px;
     margin-bottom: 20px;
     font-size: 12px;
     line-height: 14px;
@@ -195,6 +176,7 @@ export const FullStorage = styled.p`
 `
 
 export const TimeWrap = styled.p`
+    padding-left: 30px;
     font-size: 12px;
     line-height: 14px;
 `

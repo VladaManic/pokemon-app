@@ -18,7 +18,7 @@ import { FormData } from '../../types/interfaces'
 const Login = () => {
     const navigate = useNavigate()
     const [localStorageError, setLocalStorageError] = useState<string>('')
-    //localStorage.clear()
+    localStorage.clear()
 
     useEffect(() => {
         //Checking if local-storage is available
@@ -67,6 +67,7 @@ const Login = () => {
             )}
             <FormWrap>
                 <form
+                    id="login-form"
                     className="login-form"
                     onSubmit={handleSubmit(submitData)}
                 >
@@ -110,7 +111,12 @@ const Login = () => {
                         className={clsx(errors.email && 'error')}
                         {...register('email')}
                     />
-                    <input type="submit" value="Enter" className="submit-btn" />
+                    <input
+                        type="submit"
+                        value="Enter"
+                        id="submit-btn"
+                        className="submit-btn"
+                    />
                 </form>
             </FormWrap>
         </>

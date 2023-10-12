@@ -58,7 +58,7 @@ const FilterBar = ({ onChangeColor }: Props) => {
                                 {data.colors.results.map(
                                     (color: ColorObj, index: number) => (
                                         <OptionWrap
-                                            key={index}
+                                            key={color.name}
                                             value={index + 1}
                                         >
                                             {color.name}

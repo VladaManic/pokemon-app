@@ -15,6 +15,21 @@ export type AbilityObj = {
     slot: number
 }
 
+export type SpritesObj = {
+    other: { dream_world: { front_default: string } }
+}
+
+export type SinglePokemonObj = {
+    pokemon: {
+        id: number
+        name: string
+        height: number
+        weight: number
+        abilities: AbilityObj[]
+        sprites: SpritesObj
+    }
+}
+
 export type ColorObj = {
     name: string
     url: string

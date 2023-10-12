@@ -1,4 +1,4 @@
-import SinglePokemon from '../../Reusable/SinglePokemon'
+import PokemonCard from '../PokemonCard'
 
 import { PokemonDetailsWrap, NoPokemonWrap } from './style'
 
@@ -14,7 +14,7 @@ const PokemonDetails = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
             {pokemonId === 0 ? (
                 <NoPokemonWrap>Select pokemon to see its details</NoPokemonWrap>
             ) : (
-                <SinglePokemon
+                <PokemonCard
                     pokemonId={pokemonId}
                     imgLoader={imgLoader}
                     onLoadImg={onLoadImg}
