@@ -5,7 +5,6 @@ import { getPokemonSingle } from '../../api/requests'
 
 import SinglePokemon from '../../components/Reusable/SinglePokemon'
 
-import BgImage from '../../assets/img/bg-img.png'
 import {
     SingleWrap,
     BackgroundWrap,
@@ -31,7 +30,13 @@ const Single = () => {
         <SingleWrap>
             <BackgroundWrap>
                 <BackgroundInner>
-                    <BackgroundImg src={BgImage} alt="Pokemon image" />
+                    <BackgroundImg
+                        src={
+                            data?.pokemon.sprites.other.dream_world
+                                .front_default
+                        }
+                        alt="Pokemon image"
+                    />
                 </BackgroundInner>
                 <SingleInner>
                     {isError ? (

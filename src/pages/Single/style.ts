@@ -25,6 +25,7 @@ export const BackgroundImg = styled.img`
     width: 100%;
     height: 100%;
     object-fit: contain;
+    opacity: 0.05;
 `
 
 export const SingleInner = styled.div`
