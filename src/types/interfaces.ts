@@ -15,6 +15,21 @@ export type AbilityObj = {
     slot: number
 }
 
+export type SpritesObj = {
+    other: { dream_world: { front_default: string } }
+}
+
+export type SinglePokemonObj = {
+    pokemon: {
+        id: number
+        name: string
+        height: number
+        weight: number
+        abilities: AbilityObj[]
+        sprites: SpritesObj
+    }
+}
+
 export type ColorObj = {
     name: string
     url: string
@@ -26,7 +41,7 @@ export type PokemonsByColor = {
     pagePokemons: PokemonObj[]
 }
 
-export interface ColoredPokemonsCtxProps {
+export type ColoredPokemonsCtxProps = {
     pokemons: PokemonObj[]
     pagePokemons: PokemonObj[]
     page: number
@@ -39,4 +54,18 @@ export interface ColoredPokemonsCtxProps {
         pokemons: PokemonObj[],
         pagePokemons: PokemonObj[]
     ) => void
+}
+
+export type CaughtPokemon = {
+    id: number
+    url: string
+    name: string
+    timeCaught: Date | number
+}
+
+export type CaughtPokemonsCtxProps = {
+    alreadyCaught: [] | CaughtPokemon[]
+    catchingDone: boolean
+    setAlreadyCaught: (data: CaughtPokemon) => void
+    setCatchingDone: (param: boolean) => void
 }

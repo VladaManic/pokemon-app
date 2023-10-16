@@ -1,14 +1,9 @@
-import { useState } from 'react'
-import clsx from 'clsx'
-
-import Loader from '../../../components/Reusable/Loader'
+import Loader from '../../Reusable/LoaderImg'
 
 import {
     PokemonWrap,
     PokemonInner,
-    ImgWrap,
-    LoaderWrap,
-    PokemonImg,
+    LoaderWrapper,
     PokemonName,
     PokemonIndexWrap,
     PokemonIndexInner,
@@ -21,28 +16,22 @@ interface Props {
 }
 
 const PokemonItem = ({ singlePokemon, onClick }: Props) => {
-    const [imgLoader, setImgLoader] = useState<boolean>(true)
     const url = singlePokemon.url
     const pokemonNo = url.split('/')[6]
 
     return (
         <PokemonWrap id={pokemonNo} onClick={onClick}>
             <PokemonInner>
-                <ImgWrap>
-                    <LoaderWrap className={clsx(!imgLoader && 'hide')}>
-                        <Loader />
-                    </LoaderWrap>
-                    <PokemonImg
+                <LoaderWrapper className="loader-wrap">
+                    <Loader
                         src={
                             `https://unpkg.com/pokeapi-sprites@2.0.4/sprites/pokemon/other/dream-world/` +
                             pokemonNo +
                             `.svg`
                         }
                         alt={singlePokemon.name}
-                        onLoad={() => setImgLoader(false)}
-                        className={clsx(imgLoader && 'hide')}
                     />
-                </ImgWrap>
+                </LoaderWrapper>
                 <PokemonName>{singlePokemon.name}</PokemonName>
             </PokemonInner>
             <PokemonIndexWrap className="index-wrap">

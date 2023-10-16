@@ -12,7 +12,7 @@ const Main = () => {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/home/" element={<Home />} />
-                <Route path="/pokemon/:name" element={<Single />} />
+                <Route path="/pokemon/:pokemonName" element={<Single />} />
             </Routes>
         </MainWrap>
     )

@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import { useLocation, NavLink } from 'react-router-dom'
+import CaughtPokemonsContext from '../../context/CaughtPokemonsContext'
 
 import backIcon from '../../assets/img/back-icon.svg'
 import {
@@ -11,6 +13,7 @@ import {
 
 const Header = () => {
     const { pathname } = useLocation()
+    const caughtPokemonsCtx = useContext(CaughtPokemonsContext)
 
     return (
         <HeaderWrap>
@@ -22,7 +25,9 @@ const Header = () => {
             <TitleWrap>Pokemon App</TitleWrap>
             {(pathname === '/home/' || pathname.includes('/pokemon/')) && (
                 <CaughtWrap>
-                    <CaughtInner>0</CaughtInner>
+                    <CaughtInner>
+                        {caughtPokemonsCtx.alreadyCaught.length}
+                    </CaughtInner>
                 </CaughtWrap>
             )}
         </HeaderWrap>

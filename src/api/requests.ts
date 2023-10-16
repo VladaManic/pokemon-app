@@ -42,7 +42,9 @@ export const getPokemonList = async (
 }
 
 //Fetching single pokemon data
-export const getPokemonSingle = async (pokemonId: number) => {
+export const getPokemonSingle = async (
+    pokemonId: number | string | undefined
+) => {
     const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
     )
