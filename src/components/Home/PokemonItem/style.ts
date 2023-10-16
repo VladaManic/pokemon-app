@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 import { color } from '../../../shared/styles/variables'
 
+export const LoaderWrapper = styled.div`
+    .img-wrap {
+        margin-top: 0;
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+`
+
 export const PokemonWrap = styled.div`
     box-sizing: border-box;
     display: flex;
@@ -35,27 +43,6 @@ export const PokemonWrap = styled.div`
 export const PokemonInner = styled.div`
     display: flex;
     align-items: center;
-`
-
-export const ImgWrap = styled.div`
-    display: flex;
-    align-items: center;
-    height: 65px;
-    margin-right: 20px;
-`
-
-export const LoaderWrap = styled.div`
-    &.hide {
-        display: none;
-    }
-`
-
-export const PokemonImg = styled.img`
-    height: 100%;
-
-    &.hide {
-        display: none;
-    }
 `
 
 export const PokemonName = styled.p`

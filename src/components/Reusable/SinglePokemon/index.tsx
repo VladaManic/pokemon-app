@@ -4,7 +4,7 @@ import CaughtPokemonsContext from '../../../context/CaughtPokemonsContext'
 import clsx from 'clsx'
 import { format } from 'date-fns'
 
-import Loader from '../../../components/Reusable/Loader'
+import LoaderImg from '../LoaderImg'
 
 import CatchIcon from '../../../assets/img/catch.svg'
 import SuccessIcon from '../../../assets/img/successfully-caught.svg'
@@ -15,8 +15,6 @@ import {
     CatchImg,
     IdWrap,
     IdInner,
-    LoaderWrap,
-    PokemonImg,
     TitleWrap,
     CaughtImg,
     PokemonName,
@@ -43,19 +41,11 @@ import {
 
 interface Props {
     pokemonId: number
-    imgLoader: boolean
-    onLoadImg: () => void
     data: SinglePokemonObj
     dataUpdatedAt: number
 }
 
-const SinglePokemon = ({
-    pokemonId,
-    imgLoader,
-    onLoadImg,
-    data,
-    dataUpdatedAt,
-}: Props) => {
+const SinglePokemon = ({ pokemonId, data, dataUpdatedAt }: Props) => {
     const [catchingLoading, setCatchingLoading] = useState<boolean>(false)
     const [catchingSuccess, setCatchingSuccess] = useState<boolean>(true)
     const [catchTime, setCatchTime] = useState<Date | number>(0)
@@ -132,14 +122,9 @@ const SinglePokemon = ({
             <IdWrap>
                 <IdInner className="index-inner">{data?.pokemon.id}</IdInner>
             </IdWrap>
-            <LoaderWrap className={clsx(!imgLoader && 'hide')}>
-                <Loader />
-            </LoaderWrap>
-            <PokemonImg
+            <LoaderImg
                 src={data?.pokemon.sprites.other.dream_world.front_default}
                 alt={data?.pokemon.name}
-                onLoad={onLoadImg}
-                className={clsx(imgLoader && 'hide')}
             />
             <TitleWrap>
                 {caughtPokemonsCtx.alreadyCaught.filter(

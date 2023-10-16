@@ -7,11 +7,9 @@ import { ErrorWrap, LoadingText } from './style'
 
 interface Props {
     pokemonId: number
-    imgLoader: boolean
-    onLoadImg: () => void
 }
 
-const PokemonCard = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
+const PokemonCard = ({ pokemonId }: Props) => {
     //Calling helper function which is enabling tanstack-query single pokemon fetch functionality
     const { isError, isLoading, data, dataUpdatedAt } = useQuery({
         queryKey: ['Pokemon', pokemonId],
@@ -27,8 +25,6 @@ const PokemonCard = ({ pokemonId, imgLoader, onLoadImg }: Props) => {
             ) : (
                 <SinglePokemon
                     pokemonId={pokemonId}
-                    imgLoader={imgLoader}
-                    onLoadImg={onLoadImg}
                     data={data}
                     dataUpdatedAt={dataUpdatedAt}
                 />
