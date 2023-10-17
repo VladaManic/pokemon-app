@@ -29,6 +29,8 @@ export const CaughtPokemonsContextProvider = ({
             //No caught pokemons jet
             caughtPokemons = []
         }
+    } else {
+        caughtPokemons = []
     }
     const [currentAlreadyCaught, setCurrentAlreadyCaught] = useState<
         [] | CaughtPokemon[]
