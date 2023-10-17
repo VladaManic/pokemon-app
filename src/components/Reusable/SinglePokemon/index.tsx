@@ -84,7 +84,10 @@ const SinglePokemon = ({ pokemonId, data, dataUpdatedAt }: Props) => {
                     name: data?.pokemon.name,
                     timeCaught: dataUpdatedAt,
                 }
-                caughtPokemonsCtx.setAlreadyCaught(pokemonData)
+                caughtPokemonsCtx.setAlreadyCaught([
+                    ...caughtPokemonsCtx.alreadyCaught,
+                    pokemonData,
+                ])
                 //Success message set
                 setCatchingSuccess(true)
                 //Setting current time as time of catching
