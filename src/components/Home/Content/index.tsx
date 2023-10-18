@@ -30,7 +30,6 @@ const Content = ({
     onClickBtn,
 }: Props) => {
     const [chosenPokemon, setChosenPokemon] = useState<number>(0)
-    //const [imgLoader, setImgLoader] = useState<boolean>(true)
     const caughtPokemonsCtx = useContext(CaughtPokemonsContext)
 
     //Clicking on pokemon from layout to open it's details
@@ -39,7 +38,6 @@ const Content = ({
     ) => {
         const id = parseInt(e.currentTarget.id)
         setChosenPokemon(id)
-        //setImgLoader(true)
         //Reset catching process for try with new pokemon
         caughtPokemonsCtx.setCatchingDone(false)
     }

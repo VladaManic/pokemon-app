@@ -1,3 +1,5 @@
+import { Theme, ToastPosition } from 'react-toastify'
+
 export type FormData = {
     fullname: string
     age: number
@@ -66,6 +68,22 @@ export type CaughtPokemon = {
 export type CaughtPokemonsCtxProps = {
     alreadyCaught: [] | CaughtPokemon[]
     catchingDone: boolean
-    setAlreadyCaught: (data: CaughtPokemon) => void
+    setAlreadyCaught: (data: CaughtPokemon[]) => void
     setCatchingDone: (param: boolean) => void
+}
+
+export type PokemonHoverObj = {
+    name: string
+    time: string | undefined
+}
+
+export type ToastifyProps = {
+    position: ToastPosition | undefined
+    autoClose: number
+    hideProgressBar: boolean
+    closeOnClick: boolean
+    pauseOnHover: boolean
+    draggable: boolean
+    progress: undefined
+    theme: Theme | undefined
 }

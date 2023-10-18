@@ -19,4 +19,11 @@ export const color = {
     abilityGray: '#ECECEC',
     successGreen: '#009D38',
     failRed: '#FF1C1C',
+    overlayGray: 'rgba(101, 101, 101, 0.5)',
+    itemGray: 'rgba(242, 242, 242, 1)',
+    bgGray: 'rgba(248, 248, 248, 1)',
+    removePink: 'rgba(255, 170, 170, 1)',
+    cardGray: 'rgba(101, 101, 101, 1)',
+    nameBlack: 'rgba(43, 43, 43, 1)',
+    releaseRed: 'rgba(255, 0, 0, 1)',
 }

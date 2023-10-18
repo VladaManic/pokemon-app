@@ -28,6 +28,7 @@ export const CaughtWrap = styled.div`
     height: 28px;
     border-radius: 50px;
     background-color: ${color.defaultBg};
+    cursor: pointer;
 `
 
 export const CaughtInner = styled.p`

@@ -6,7 +6,7 @@ import isStorageSupported from '../utils/isStorageSupported'
 const CaughtPokemonsContext = createContext<CaughtPokemonsCtxProps>({
     alreadyCaught: [],
     catchingDone: false,
-    setAlreadyCaught: (data: CaughtPokemon) => {
+    setAlreadyCaught: (data: CaughtPokemon[]) => {
         null
     },
     setCatchingDone: (param: boolean) => {
@@ -29,6 +29,8 @@ export const CaughtPokemonsContextProvider = ({
             //No caught pokemons jet
             caughtPokemons = []
         }
+    } else {
+        caughtPokemons = []
     }
     const [currentAlreadyCaught, setCurrentAlreadyCaught] = useState<
         [] | CaughtPokemon[]
@@ -36,12 +38,12 @@ export const CaughtPokemonsContextProvider = ({
     const [currentCatchingDone, setCurrentCatchingDone] =
         useState<boolean>(false)
 
-    const setAlreadyCaughtHandler = (data: CaughtPokemon) => {
-        //Adding new caught pokemon to already caught
-        setCurrentAlreadyCaught([...currentAlreadyCaught, data])
+    //Replacing already caught pokemons with new set
+    const setAlreadyCaughtHandler = (data: CaughtPokemon[]) => {
+        setCurrentAlreadyCaught(data)
     }
 
-    //Is caching process done
+    //Is catching process done
     const setCatchingDoneHandler = (param: boolean) => {
         setCurrentCatchingDone(param)
     }

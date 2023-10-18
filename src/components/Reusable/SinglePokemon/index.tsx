@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from 'react'
 import { useLocation, NavLink } from 'react-router-dom'
 import CaughtPokemonsContext from '../../../context/CaughtPokemonsContext'
+import isStorageSupported from '../../../utils/isStorageSupported'
 import clsx from 'clsx'
 import { format } from 'date-fns'
 
@@ -55,10 +56,11 @@ const SinglePokemon = ({ pokemonId, data, dataUpdatedAt }: Props) => {
 
     useEffect(() => {
         //Adding new caught pokemon to localStorage
-        localStorage.setItem(
-            'caught-pokemons',
-            JSON.stringify(caughtPokemonsCtx.alreadyCaught)
-        )
+        isStorageSupported('localStorage') &&
+            localStorage.setItem(
+                'caught-pokemons',
+                JSON.stringify(caughtPokemonsCtx.alreadyCaught)
+            )
     }, [caughtPokemonsCtx.alreadyCaught])
 
     //Click on catch btn
@@ -84,7 +86,10 @@ const SinglePokemon = ({ pokemonId, data, dataUpdatedAt }: Props) => {
                     name: data?.pokemon.name,
                     timeCaught: dataUpdatedAt,
                 }
-                caughtPokemonsCtx.setAlreadyCaught(pokemonData)
+                caughtPokemonsCtx.setAlreadyCaught([
+                    ...caughtPokemonsCtx.alreadyCaught,
+                    pokemonData,
+                ])
                 //Success message set
                 setCatchingSuccess(true)
                 //Setting current time as time of catching
