@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useLocation, NavLink } from 'react-router-dom'
 import CaughtPokemonsContext from '../../context/CaughtPokemonsContext'
 
 import Modal from '../../components/Reusable/Modal'
@@ -15,6 +15,7 @@ import {
 } from './style'
 
 const Header = () => {
+    const { pathname } = useLocation()
     const [openModal, setOpenModal] = useState<boolean>(false)
     const caughtPokemonsCtx = useContext(CaughtPokemonsContext)
 
@@ -34,19 +35,19 @@ const Header = () => {
     return (
         <>
             <HeaderWrap>
-                {/* {pathname.includes('/pokemon/') && ( */}
-                <NavLink to={`/home`} end className="back-link">
-                    <BackIcon src={backIcon} alt="Back to home page" />
-                </NavLink>
-                {/* )} */}
+                {pathname.includes('/pokemon/') && (
+                    <NavLink to={`/home`} end className="back-link">
+                        <BackIcon src={backIcon} alt="Back to home page" />
+                    </NavLink>
+                )}
                 <TitleWrap>Pokemon App</TitleWrap>
-                {/* {pathname !== '/' && ( */}
-                <CaughtWrap onClick={onClickHandler}>
-                    <CaughtInner>
-                        {caughtPokemonsCtx.alreadyCaught.length}
-                    </CaughtInner>
-                </CaughtWrap>
-                {/* )} */}
+                {pathname !== '/' && (
+                    <CaughtWrap onClick={onClickHandler}>
+                        <CaughtInner>
+                            {caughtPokemonsCtx.alreadyCaught.length}
+                        </CaughtInner>
+                    </CaughtWrap>
+                )}
             </HeaderWrap>
             {openModal && (
                 <Modal onClose={onCloseHandler}>
