@@ -1,6 +1,8 @@
-import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonSingle } from '../../api/requests'
+import isStorageSupported from '../../utils/isStorageSupported'
 
 import SinglePokemon from '../../components/Reusable/SinglePokemon'
 
@@ -17,6 +19,14 @@ import {
 const Single = () => {
     //Getting param from URL
     const { pokemonName } = useParams()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (isStorageSupported('localStorage')) {
+            //Redirecting to Login page if user is not logged in
+            localStorage.getItem('pokemon-app') === null && navigate('/')
+        }
+    }, [])
 
     //Calling helper function which is enabling tanstack-query single pokemon fetch functionality
     const { isError, isLoading, data, dataUpdatedAt } = useQuery({

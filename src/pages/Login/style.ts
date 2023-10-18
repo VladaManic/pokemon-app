@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import { color } from '../../shared/styles/variables'
 
-export const LocalStorageErrorWrap = styled.h2``
-
 export const FormWrap = styled.div`
     display: flex;
     justify-content: center;
@@ -50,6 +48,11 @@ export const FormWrap = styled.div`
             text-transform: uppercase;
             color: ${color.labelGray};
             cursor: pointer;
+            transition: all 0.4s ease;
+
+            &:hover {
+                opacity: 0.6;
+            }
         }
     }
 `

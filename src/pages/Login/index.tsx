@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { z, ZodType } from 'zod'
 import { useForm } from 'react-hook-form'
@@ -6,29 +6,17 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import isStorageSupported from '../../utils/isStorageSupported'
 import clsx from 'clsx'
 
-import {
-    LocalStorageErrorWrap,
-    FormWrap,
-    LabelWrap,
-    ErrorWrap,
-    NotificationWrap,
-} from './style'
+import { FormWrap, LabelWrap, ErrorWrap, NotificationWrap } from './style'
 import { FormData } from '../../types/interfaces'
 
 const Login = () => {
     const navigate = useNavigate()
-    const [localStorageError, setLocalStorageError] = useState<string>('')
     //localStorage.clear()
 
     useEffect(() => {
-        //Checking if local-storage is available
-        if (!isStorageSupported('localStorage')) {
-            setLocalStorageError('No local storage is available!')
-        } else {
-            //Redirecting to Home page if user is loged in once
-            if (localStorage.getItem('pokemon-app') !== null) {
-                navigate('/home/')
-            }
+        if (isStorageSupported('localStorage')) {
+            //Redirecting to Home page if user is logged in once
+            localStorage.getItem('pokemon-app') !== null && navigate('/home/')
         }
     }, [])
 
@@ -52,19 +40,13 @@ const Login = () => {
 
     //On submit, set data to local-storage (if available) and redirect to Home page
     const submitData = (data: FormData) => {
-        isStorageSupported('localStorage')
-            ? localStorage.setItem('pokemon-app', JSON.stringify(data))
-            : setLocalStorageError('No local storage is available!')
+        isStorageSupported('localStorage') &&
+            localStorage.setItem('pokemon-app', JSON.stringify(data))
         navigate('/home/')
     }
 
     return (
         <>
-            {localStorageError !== '' && (
-                <LocalStorageErrorWrap>
-                    {localStorageError}
-                </LocalStorageErrorWrap>
-            )}
             <FormWrap>
                 <form
                     id="login-form"

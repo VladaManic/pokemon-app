@@ -35,6 +35,7 @@ export const ReturnBtn = styled.button`
     line-height: 20px;
     font-weight: 700;
     color: ${color.submitGray};
+    transition: all 0.4s ease;
 
     &:hover {
         opacity: 0.6;
