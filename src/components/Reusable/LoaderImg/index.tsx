@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { SyntheticEvent, useState } from 'react'
 import clsx from 'clsx'
 
+import fallbackImg from '../../../assets/img/img-fallback.svg'
 import { ImgWrap, LoaderWrap, LoaderInner, PokemonImg } from './style'
 
 interface Props {
@@ -11,6 +12,11 @@ interface Props {
 const LoaderImg = ({ src, alt }: Props) => {
     const [imgLoader, setImgLoader] = useState<boolean>(true)
 
+    //On image load error, replace image with fallback
+    const addImageFallback = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+        e.currentTarget.src = fallbackImg
+    }
+
     return (
         <ImgWrap className="img-wrap">
             <LoaderWrap className={clsx('loader-wrap', !imgLoader && 'hide')}>
@@ -19,8 +25,9 @@ const LoaderImg = ({ src, alt }: Props) => {
             <PokemonImg
                 src={src}
                 alt={alt}
-                onLoad={() => setImgLoader(false)}
                 className={clsx(imgLoader && 'hide')}
+                onLoad={() => setImgLoader(false)}
+                onError={addImageFallback}
             />
         </ImgWrap>
     )
