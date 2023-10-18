@@ -36,12 +36,14 @@ const Header = () => {
         <>
             <HeaderWrap>
                 {pathname.includes('/pokemon/') && (
-                    <NavLink to={`/home/`} end className="back-link">
+                    <NavLink to={`/home`} end className="back-link">
                         <BackIcon src={backIcon} alt="Back to home page" />
                     </NavLink>
                 )}
                 <TitleWrap>Pokemon App</TitleWrap>
-                {(pathname === '/home/' || pathname.includes('/pokemon/')) && (
+                {(pathname.includes('/home') ||
+                    pathname.includes('/home/') ||
+                    pathname.includes('/pokemon/')) && (
                     <CaughtWrap onClick={onClickHandler}>
                         <CaughtInner>
                             {caughtPokemonsCtx.alreadyCaught.length}

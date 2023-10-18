@@ -37,13 +37,17 @@ const PokemonDetails = ({
     const caughtPokemonsCtx = useContext(CaughtPokemonsContext)
     const userData =
         isStorageSupported('localStorage') &&
-        JSON.parse(localStorage.getItem('pokemon-app') || '')
+        localStorage.getItem('pokemon-app')
 
     return (
         <DetailsWrap>
             {hoveredPokemon === null ? (
                 <DetailsCard>
-                    <DetailsTitle>Hi, {userData.fullname}</DetailsTitle>
+                    <DetailsTitle>
+                        Hi,{' '}
+                        {userData !== null &&
+                            JSON.parse(userData || '').fullname}
+                    </DetailsTitle>
                     {caughtPokemonsCtx.alreadyCaught.length !== 0 ? (
                         <DetailsText>
                             Hover over pokemon to see some info
