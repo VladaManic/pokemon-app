@@ -1,4 +1,6 @@
-function isStorageSupported(): boolean {
+function isStorageSupported(
+    webStorageType: 'localStorage' | 'sessionStorage' = 'localStorage'
+): boolean {
     /**
      * Determines whether an error is a QuotaExceededError.
      *
@@ -40,7 +42,6 @@ function isStorageSupported(): boolean {
      * @return Is the storage supported?
      */
     try {
-        const webStorageType: 'localStorage' | 'sessionStorage' = 'localStorage'
         const storage: Storage | undefined = window[webStorageType]
         const testKey = '__test__'
         // Try to write to localStorage
