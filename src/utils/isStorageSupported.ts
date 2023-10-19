@@ -40,7 +40,8 @@ function isStorageSupported(): boolean {
      * @return Is the storage supported?
      */
     try {
-        const storage = window.localStorage
+        const webStorageType: 'localStorage' | 'sessionStorage' = 'localStorage'
+        const storage: Storage | undefined = window[webStorageType]
         const testKey = '__test__'
         // Try to write to localStorage
         storage.setItem(testKey, testKey)
