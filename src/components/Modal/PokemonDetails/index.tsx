@@ -45,8 +45,9 @@ const PokemonDetails = ({
                 <DetailsCard>
                     <DetailsTitle>
                         Hi,{' '}
-                        {userData !== null &&
-                            JSON.parse(userData || '').fullname}
+                        {userData !== null ||
+                            (userData !== false &&
+                                JSON.parse(userData || '').fullname)}
                     </DetailsTitle>
                     {caughtPokemonsCtx.alreadyCaught.length !== 0 ? (
                         <DetailsText>

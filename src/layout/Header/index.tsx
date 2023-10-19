@@ -41,9 +41,7 @@ const Header = () => {
                     </NavLink>
                 )}
                 <TitleWrap>Pokemon App</TitleWrap>
-                {(pathname.includes('/home') ||
-                    pathname.includes('/home/') ||
-                    pathname.includes('/pokemon/')) && (
+                {pathname !== '/' && (
                     <CaughtWrap onClick={onClickHandler}>
                         <CaughtInner>
                             {caughtPokemonsCtx.alreadyCaught.length}

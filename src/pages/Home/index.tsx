@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import ColoredPokemonsContext from '../../context/ColoredPokemonsContext'
 import { useQuery } from '@tanstack/react-query'
 import { getPokemonList } from '../../api/requests'
+import isStorageSupported from '../../utils/isStorageSupported'
 import axios from 'axios'
 
 import FilterBar from '../../components/Home/FilterBar'
@@ -14,9 +16,17 @@ import { PokemonsByColor } from '../../types/interfaces'
 import { HomeWrap } from './style'
 
 const Home = () => {
-    const coloredPokemonsCtx = useContext(ColoredPokemonsContext)
+    const navigate = useNavigate()
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [selectedColor, setSelectedColor] = useState<number>(0)
+    const coloredPokemonsCtx = useContext(ColoredPokemonsContext)
+
+    useEffect(() => {
+        if (isStorageSupported('localStorage')) {
+            //Redirecting to Login page if user is not logged in
+            localStorage.getItem('pokemon-app') === null && navigate('/')
+        }
+    }, [])
 
     //Calling helper function which is enabling tanstack-query pagination and filter by color functionality
     const { isError, isLoading, data, dataUpdatedAt } = useQuery({
@@ -47,9 +57,6 @@ const Home = () => {
     //             console.log(error)
     //         })
     // }
-    // useEffect(() => {
-    //     //fetchData()
-    // }, [])
 
     //Changing current page when fetching from API with page by page
     const onPageChangeHandler = (param: number) => {
